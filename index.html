@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedro Azevedo | Visual Storyteller</title>
     
-    <!-- Fontes Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- ESTILOS GERAIS --- */
         :root {
             --bg-color: #f0efe6;
             --text-color: #1a1a1a;
@@ -20,7 +18,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         html { scroll-behavior: smooth; }
 
         body {
@@ -57,28 +54,39 @@
         .nav-links a { text-decoration: none; color: var(--secondary-color); margin-left: 20px; transition: color 0.3s; }
         .nav-links a:hover { color: #000; }
 
-        /* HERO - POLAROIDS */
+        /* HERO - FOTOS */
         .hero-section { text-align: center; margin-bottom: 100px; position: relative; }
         .hero-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 50px; letter-spacing: -1px; }
         
         .polaroid-wrapper {
             display: flex; justify-content: center; align-items: center;
-            height: 350px; position: relative; margin-bottom: 40px;
+            height: 500px; /* Aumentei a altura para caber as fotos maiores */
+            position: relative; margin-bottom: 40px;
         }
         
+        /* AQUI MUDEI O ESTILO DAS FOTOS */
         .polaroid {
-            background: #fff; padding: 12px 12px 45px 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: absolute; transition: all 0.4s ease;
-            width: 260px;
+            background: transparent; /* Fundo transparente */
+            padding: 0;              /* Sem borda branca */
+            box-shadow: none;        /* Sem sombra do quadrado */
+            position: absolute; 
+            transition: all 0.4s ease;
+            width: 380px;            /* Aumentei o tamanho (era 260px) */
         }
         
-        .polaroid img { width: 100%; display: block; filter: grayscale(100%); }
+        /* Adicionei sombra na própria imagem pra destacar do fundo */
+        .polaroid img { 
+            width: 100%; 
+            display: block; 
+            filter: grayscale(100%) drop-shadow(0 10px 15px rgba(0,0,0,0.3)); 
+            border-radius: 4px;
+        }
         
-        .polaroid-1 { z-index: 1; transform: rotate(-6deg) translateX(-60px); }
-        .polaroid-2 { z-index: 2; transform: rotate(4deg) translateX(60px) translateY(10px); }
+        /* Ajustei a rotação para fotos grandes */
+        .polaroid-1 { z-index: 1; transform: rotate(-5deg) translateX(-100px); }
+        .polaroid-2 { z-index: 2; transform: rotate(5deg) translateX(80px) translateY(20px); }
         
-        .polaroid:hover { z-index: 10; transform: scale(1.05) rotate(0deg); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .polaroid:hover { z-index: 10; transform: scale(1.05) rotate(0deg); }
 
         .hero-desc { max-width: 600px; margin: 0 auto; text-align: center; }
         .hero-desc h2 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
@@ -142,7 +150,7 @@
             </nav>
         </header>
 
-        <!-- SEÇÃO 1: FOTOS (Renomeie seus arquivos para foto1.png e foto2.png) -->
+        <!-- SEÇÃO 1: FOTOS -->
         <section id="sobre" class="hero-section fade-in delay-1">
             <h1 class="hero-title">por pedro azevedo</h1>
 
@@ -150,14 +158,12 @@
                 
                 <!-- FOTO CRIANÇA -->
                 <div class="polaroid polaroid-1">
-                    <!-- Cole o link da foto de criança dentro das aspas abaixo -->
-                    <img src="<a href="https://ibb.co/4ZtCjkDr"><img src="https://i.ibb.co/3ydV0K8Z/foto1.png" alt="foto1" border="0"></a>" alt="Pedro Criança">
+                    <img src="https://i.ibb.co/3ydV0K8Z/foto1.png" alt="Pedro Criança">
                 </div>
 
                 <!-- FOTO ADULTO -->
                 <div class="polaroid polaroid-2">
-                    <!-- Cole o link da foto de adulto dentro das aspas abaixo -->
-                    <img src="<a href="https://ibb.co/V0jYDMJB"><img src="https://i.ibb.co/20n3PcWK/foto2.png" alt="foto2" border="0"></a>" alt="Pedro Atual">
+                    <img src="https://i.ibb.co/20n3PcWK/foto2.png" alt="Pedro Atual">
                 </div>
 
             </div>
@@ -186,17 +192,19 @@
             <h3 class="section-header">Trabalhos selecionados</h3>
             
             <div class="grid">
-                <!-- Se quiser mudar as capas dos vídeos, salve como video1.jpg na mesma pasta e troque o link abaixo -->
+                <!-- VÍDEO 1 -->
                 <div class="project-card">
                     <img src="https://picsum.photos/id/16/600/350" alt="Projeto 1">
                     <div class="play-icon"></div>
                 </div>
 
+                <!-- VÍDEO 2 -->
                 <div class="project-card">
                     <img src="https://picsum.photos/id/42/600/350" alt="Projeto 2">
                     <div class="play-icon"></div>
                 </div>
 
+                <!-- VÍDEO 3 -->
                 <div class="project-card">
                     <img src="https://picsum.photos/id/88/600/350" alt="Projeto 3">
                     <div class="play-icon"></div>
