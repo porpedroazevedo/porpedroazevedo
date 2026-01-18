@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedro Azevedo | Visual Storyteller</title>
     
-    <!-- Importação de Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- CONFIGURAÇÕES GERAIS --- */
+        /* --- RESET & VARS --- */
         :root {
-            --bg-color: #f0efe6;
-            --text-color: #1a1a1a;
-            --secondary-color: #555;
+            --bg-color: #f2f1eb; /* Off-white mais "papel" */
+            --text-color: #111;
+            --secondary-color: #666;
+            --accent-color: #000;
             --font-main: 'DM Sans', sans-serif;
+            --container-width: 1000px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,259 +27,171 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: var(--font-main);
-            line-height: 1.6;
-            overflow-x: hidden; /* Evita rolagem lateral indesejada */
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
-        /* Animações */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .fade-in { animation: fadeIn 1.2s ease forwards; opacity: 0; }
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
-        .delay-3 { animation-delay: 0.6s; }
-        .delay-4 { animation-delay: 0.8s; }
+        .reveal { animation: fadeUp 1s cubic-bezier(0.2, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.5s; }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-
-        /* HEADER */
+        /* --- HEADER --- */
         header {
             padding: 40px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px;
+            font-weight: 500;
         }
-        .brand { font-weight: 700; text-decoration: none; color: var(--text-color); }
-        .nav-links a { text-decoration: none; color: var(--secondary-color); margin-left: 20px; transition: color 0.3s; }
-        .nav-links a:hover { color: #000; }
+        .brand { text-decoration: none; color: var(--text-color); font-weight: 700; }
+        .nav-links a { text-decoration: none; color: var(--secondary-color); margin-left: 25px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
 
-        /* HERO - FOTOS */
-        .hero-section { text-align: center; margin-bottom: 100px; position: relative; }
-        .hero-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 50px; letter-spacing: -1px; }
+        /* --- INTRO & HERO PROJECT --- */
+        .intro-section { margin: 80px 0 120px 0; }
         
-        .polaroid-wrapper {
-            display: flex; justify-content: center; align-items: center;
-            height: 500px; position: relative; margin-bottom: 40px;
+        .intro-title {
+            font-size: 4.5rem; line-height: 0.95; letter-spacing: -2px;
+            font-weight: 700; margin-bottom: 20px;
+            color: var(--text-color);
         }
-        
-        .polaroid {
-            background: transparent; padding: 0; box-shadow: none;
-            position: absolute; transition: all 0.4s ease;
-            width: 560px; /* Largura Desktop */
-            max-width: 100%;
+        .intro-subtitle {
+            font-size: 1.5rem; color: var(--secondary-color);
+            font-weight: 300; max-width: 600px; margin-bottom: 60px;
         }
-        
-        .polaroid img { 
-            width: 100%; display: block; 
-            filter: grayscale(100%) drop-shadow(0 10px 15px rgba(0,0,0,0.3)); 
-            border-radius: 4px;
+
+        /* O PROJETO HERO */
+        .hero-project {
+            width: 100%; position: relative;
+            margin-bottom: 40px; cursor: pointer;
         }
+        .hero-media-wrapper {
+            width: 100%; aspect-ratio: 16/9;
+            overflow: hidden; border-radius: 2px;
+            background: #000;
+        }
+        .hero-img {
+            width: 100%; height: 100%; object-fit: cover;
+            opacity: 0.9; transition: transform 0.7s ease, opacity 0.5s ease;
+        }
+        .hero-project:hover .hero-img { transform: scale(1.03); opacity: 1; }
         
-        .polaroid-1 { z-index: 1; transform: rotate(-5deg) translateX(-100px); }
-        .polaroid-2 { z-index: 2; transform: rotate(5deg) translateX(80px) translateY(20px); }
-        .polaroid:hover { z-index: 10; transform: scale(1.05) rotate(0deg); }
+        .hero-meta {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;
+        }
+        .meta-left h2 { font-size: 1.8rem; font-weight: 500; margin-bottom: 5px; letter-spacing: -0.5px; }
+        .meta-tags { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary-color); }
+        .meta-desc { max-width: 400px; font-size: 1rem; color: #444; line-height: 1.6; }
 
-        .hero-desc { max-width: 600px; margin: 0 auto; text-align: center; }
-        .hero-desc h2 { font-size: 1.1rem; margin-bottom: 10px; font-weight: 700; }
-        .hero-desc p { font-size: 1rem; color: #444; }
+        /* --- MANIFESTO (SOBRE) --- */
+        .manifesto-section {
+            padding: 100px 0; margin-bottom: 50px;
+            text-align: center; max-width: 750px; margin: 0 auto;
+        }
+        .manifesto-text {
+            font-size: 1.8rem; font-weight: 300; line-height: 1.4;
+            color: #222; margin-bottom: 30px;
+        }
+        .manifesto-small { font-size: 0.9rem; color: var(--secondary-color); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* TEXTO */
-        .narrative-section { max-width: 700px; margin: 0 auto 120px auto; }
-        .quote-block { margin-bottom: 60px; padding-left: 20px; border-left: 2px solid #ccc; }
-        .quote-text { font-size: 1.25rem; font-style: italic; font-weight: 500; display: block; margin-bottom: 15px; color: #222; }
-        .quote-author { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: #666; }
-        .bio-content p { margin-bottom: 20px; font-size: 1.1rem; color: #333; }
-
-        /* --- ESTILO DOS BLOCOS DE FILME --- */
+        /* --- CURATED WORKS (STRIP) --- */
+        .works-section { margin-bottom: 120px; }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        
         .film-container {
-            display: flex; 
-            overflow-x: auto; 
-            padding-bottom: 20px;
-            gap: -1px;
-            justify-content: flex-start;
-            -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
+            display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
         }
-        
-        /* Barra de rolagem invisível para estética clean */
-        .film-container::-webkit-scrollbar { height: 4px; }
-        .film-container::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+        .film-container::-webkit-scrollbar { height: 2px; }
+        .film-container::-webkit-scrollbar-thumb { background: #ccc; }
 
         .film-block {
-            position: relative;
-            flex-shrink: 0;
-            width: 380px;  
-            height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-            text-decoration: none;
+            position: relative; flex-shrink: 0; width: 400px; aspect-ratio: 16/9;
+            background: #000; overflow: hidden; text-decoration: none;
         }
-
-        .frame-overlay {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 10;
-            pointer-events: none; 
-            background-size: 100% 100%; 
-        }
-
-        .video-content {
-            width: 100%; height: 100%; 
-            object-fit: cover; 
+        .film-img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease, filter 0.5s ease;
             filter: grayscale(100%);
-            transition: filter 0.3s;
-            z-index: 1;
-            position: absolute; top: 0; left: 0;
         }
-        
-        .film-block:hover .video-content { filter: grayscale(0%); }
-
-        .film-block::after {
-            content: '▶';
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            color: white; font-size: 2rem; z-index: 8;
-            opacity: 0; transition: opacity 0.3s;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        .film-block:hover .film-img { transform: scale(1.05); filter: grayscale(0%); }
+        .film-info {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            padding: 20px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: #fff; opacity: 0; transition: opacity 0.3s;
         }
+        .film-block:hover .film-info { opacity: 1; }
+        .film-title { font-size: 1.1rem; font-weight: 500; }
 
-        .film-block:hover::after { opacity: 1; }
-
-        /* --- GALERIA MASONRY --- */
-        .gallery-section { margin-top: 100px; margin-bottom: 100px; }
-        .section-header { text-align: center; margin-bottom: 40px; }
-        .section-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
-        .section-header p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-
-        .masonry-grid {
-            column-count: 3; /* PC: 3 colunas */
-            column-gap: 20px;
+        /* --- GALLERY (MASONRY) --- */
+        .gallery-grid {
+            column-count: 3; column-gap: 20px;
         }
-
         .gallery-item {
-            display: inline-block; width: 100%;
-            margin-bottom: 20px;
-            position: relative; border-radius: 4px;
-            overflow: hidden; background-color: #ddd;
-            cursor: pointer;
+            display: inline-block; width: 100%; margin-bottom: 20px;
+            cursor: pointer; position: relative;
         }
-
         .gallery-item img {
-            width: 100%; height: auto;
-            display: block; filter: grayscale(100%);
-            transition: filter 0.4s ease, transform 0.4s ease;
+            width: 100%; display: block; filter: grayscale(100%);
+            transition: filter 0.3s;
         }
+        .gallery-item:hover img { filter: grayscale(0%); }
 
-        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.02); }
-
-        .item-tag {
-            position: absolute; bottom: 15px; left: 15px;
-            background: rgba(255, 255, 255, 0.85); color: #000;
-            padding: 4px 10px; font-size: 0.7rem; font-weight: 700;
-            text-transform: uppercase; border-radius: 2px;
-            opacity: 0; transform: translateY(10px);
-            transition: all 0.3s ease; pointer-events: none;
+        /* --- FOOTER (INVITE) --- */
+        footer {
+            padding: 100px 0; border-top: 1px solid #ddd;
+            display: flex; justify-content: space-between; align-items: flex-start;
         }
+        .footer-cta h3 { font-size: 2.5rem; letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px; }
+        .footer-cta p { font-size: 1.1rem; color: var(--secondary-color); margin-bottom: 40px; }
+        .contact-links a {
+            display: block; font-size: 1.5rem; text-decoration: none;
+            color: var(--text-color); margin-bottom: 10px; border-bottom: 1px solid transparent;
+            width: fit-content; transition: border-bottom 0.3s;
+        }
+        .contact-links a:hover { border-bottom: 1px solid #000; }
+        .copy { font-size: 0.75rem; color: #999; margin-top: 40px; }
 
-        .gallery-item:hover .item-tag { opacity: 1; transform: translateY(0); }
-
-        /* --- LIGHTBOX (MODAL) --- */
+        /* --- LIGHTBOX --- */
         .lightbox {
-            position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95); z-index: 2000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(242, 241, 235, 0.98); z-index: 9999;
             display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease; padding: 20px;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
         }
-
         .lightbox.active { opacity: 1; pointer-events: all; }
-
-        .lightbox-content {
-            max-width: 900px; width: 100%;
-            display: flex; flex-direction: column; align-items: center;
-            position: relative;
-        }
-
-        .lightbox-img {
-            max-height: 80vh; max-width: 100%;
-            object-fit: contain; border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .lightbox-info {
-            color: #fff; margin-top: 20px;
-            text-align: center; font-family: var(--font-main);
-        }
-
-        .lightbox-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
-        .lightbox-desc { font-size: 0.9rem; color: #ccc; max-width: 600px; }
-
+        .lightbox-content { max-width: 90vw; max-height: 90vh; text-align: center; }
+        .lightbox img { max-height: 80vh; max-width: 100%; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .lightbox-close {
-            position: absolute; top: -40px; right: 0;
-            color: #fff; font-size: 2rem; cursor: pointer;
-            background: none; border: none; transition: transform 0.3s;
+            position: absolute; top: 30px; right: 30px; font-size: 2rem;
+            background: none; border: none; cursor: pointer; color: #000;
         }
-        
-        /* FOOTER */
-        footer { border-top: 1px solid #ddd; padding: 60px 0; text-align: center; margin-top: 80px; }
-        .location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #666; margin-bottom: 10px; }
-        .contacts a { display: inline-block; margin: 0 15px; text-decoration: none; color: #1a1a1a; font-weight: 500; font-size: 1.1rem; position: relative; }
-        .contacts a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -2px; left: 0; background-color: #1a1a1a; transition: width 0.3s; }
-        .contacts a:hover::after { width: 100%; }
-        .copyright { margin-top: 40px; font-size: 0.75rem; color: #888; }
+        .lightbox-caption { margin-top: 20px; font-size: 1rem; color: #333; }
 
-        /* ========================================= */
-        /* --- MEDIA QUERIES (MOBILE OPTIMIZATION) --- */
-        /* ========================================= */
-        
+        /* --- MOBILE --- */
         @media (max-width: 768px) {
-            /* Header vira coluna */
             header { flex-direction: column; gap: 15px; }
-            .nav-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-            .nav-links a { margin: 0; font-size: 0.85rem; }
-
-            /* Hero - Polaroids empilhadas */
-            .hero-title { font-size: 2rem; }
-            .polaroid-wrapper { 
-                height: auto; 
-                flex-direction: column; 
-                margin-top: 20px; 
-                gap: 20px; 
-                margin-bottom: 60px;
-            }
-            .polaroid { 
-                position: relative; 
-                width: 90%; 
-                transform: none !important; /* Remove rotação no mobile */
-            }
-
-            /* Filmes - Blocos menores para caber melhor */
-            .film-block { width: 300px; height: 200px; }
-
-            /* Galeria - 1 Coluna (estilo Feed) */
-            .masonry-grid { column-count: 1; }
-            .gallery-item img { filter: grayscale(0%); } /* Tira P&B no mobile pois não tem mouse hover */
-            .item-tag { opacity: 1; transform: translateY(0); position: relative; bottom: 0; left: 0; background: none; color: #555; margin-top: 5px; display: block; padding-left: 0; }
-
-            /* Lightbox - Ajuste botão fechar */
-            .lightbox-close { 
-                top: 10px; right: 10px; position: fixed;
-                background: rgba(0,0,0,0.5); width: 40px; height: 40px;
-                border-radius: 50%; display: flex; align-items: center; justify-content: center;
-                font-size: 1.5rem;
-            }
-            
-            /* Footer */
-            .contacts a { display: block; margin: 10px 0; }
+            .intro-title { font-size: 2.8rem; }
+            .intro-subtitle { font-size: 1.1rem; }
+            .hero-meta { flex-direction: column; gap: 20px; }
+            .gallery-grid { column-count: 1; }
+            .film-block { width: 300px; }
+            footer { flex-direction: column; gap: 40px; }
+            .footer-cta h3 { font-size: 2rem; }
+            .contact-links a { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -286,185 +199,170 @@
 
     <div class="container">
         
-        <header class="fade-in">
+        <!-- HEADER CLEAN -->
+        <header class="reveal">
             <a href="#" class="brand">Pedro Azevedo</a>
             <nav class="nav-links">
-                <a href="#sobre">Sobre</a>
-                <a href="#trabalhos">Filmes</a>
-                <a href="#galeria">Galeria</a>
-                <a href="#contato">Contato</a>
+                <a href="#work">Projetos</a>
+                <a href="#about">Sobre</a>
+                <a href="#contact">Contato</a>
             </nav>
         </header>
 
-        <!-- SEÇÃO 1: FOTOS PESSOAIS -->
-        <section id="sobre" class="hero-section fade-in delay-1">
-            <h1 class="hero-title">por pedro azevedo</h1>
-
-            <div class="polaroid-wrapper">
-                <div class="polaroid polaroid-1">
-                    <img src="https://i.ibb.co/3ydV0K8Z/foto1.png" alt="Pedro Criança">
+        <!-- PRIMEIRA DOBRA: SOCO NO ESTÔMAGO -->
+        <section class="intro-section reveal delay-1">
+            <h1 class="intro-title">Visual Storyteller<br>& Director.</h1>
+            <p class="intro-subtitle">Crio imagens que contam histórias antes de serem explicadas. Cinema, fotografia e narrativas visuais.</p>
+            
+            <!-- PROJETO HERO (O UM QUE VALE POR DEZ) -->
+            <div class="hero-project" onclick="window.open('https://youtu.be/hO50O0aNNck?si=xcKfhar-oQD6Cx7u', '_blank')">
+                <div class="hero-media-wrapper">
+                    <!-- Coloque aqui a thumb do seu MELHOR trabalho -->
+                    <img src="https://i.ibb.co/fdG1BP0R/image.png" alt="Honeymoon" class="hero-img">
                 </div>
-                <div class="polaroid polaroid-2">
-                    <img src="https://i.ibb.co/20n3PcWK/foto2.png" alt="Pedro Atual">
+                <div class="hero-meta">
+                    <div class="meta-left">
+                        <h2>Honeymoon</h2>
+                        <span class="meta-tags">Curta-metragem / Direção / 2024</span>
+                    </div>
+                    <div class="meta-desc">
+                        Um ensaio visual sobre juventude, memória e desejo de permanência. Inspirado na estética nostálgica, o projeto mistura o íntimo e o cinematográfico.
+                    </div>
                 </div>
             </div>
-
-            <div class="hero-desc">
-                <h2>Produtor de mídias visuais especializado em imagem e narrativa.</h2>
-                <p>Trabalho com cinema, fotografia, design e cenas 3D desenvolvendo <strong>projetos autorais e produções comerciais para marcas</strong>, unindo estética e conceito.</p>
-            </div>
         </section>
 
-        <!-- SEÇÃO 2: TEXTO -->
-        <section class="narrative-section fade-in delay-2">
-            <div class="quote-block">
-                <span class="quote-text">“Medicina, direito, administração, engenharia são atividades nobres, necessárias à vida. Mas a poesia, a beleza, o romance, o amor, são as coisas pelas quais vale a pena viver.”</span>
-                <span class="quote-author">— Sociedade dos Poetas Mortos</span>
-            </div>
-
-            <div class="bio-content">
-                <p>Desde pequeno, cinema, música, fotografia e comunicação sempre foram mais que interesse em minha vida, foram linguagem, forma de observar o mundo e contar histórias.</p>
-                <p>Hoje, trabalho como produtor de mídias visuais, desenvolvendo projetos autorais, não autorais, artísticas e produções comerciais para marcas, unindo narrativa, estética e um olhar cinematográfico.</p>
-            </div>
+        <!-- MANIFESTO -->
+        <section id="about" class="manifesto-section reveal delay-2">
+            <p class="manifesto-small">Manifesto</p>
+            <h2 class="manifesto-text">
+                "O cinema sempre foi mais do que imagem. É forma de observar, sentir e registrar o que muitas vezes passa despercebido. Entre o documental e o poético, busco criar narrativas que permaneçam."
+            </h2>
         </section>
 
-        <!-- SEÇÃO 3: FILMES (VÍDEOS) -->
-        <section id="trabalhos">
-            <h3 style="text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 30px;">Filmes & Vídeos</h3>
-            
-            <div class="film-container">
-                <a href="https://youtu.be/hO50O0aNNck?si=xcKfhar-oQD6Cx7u" target="_blank" class="film-block">
-                    <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
-                    <img src="https://i.ibb.co/fdG1BP0R/image.png" class="video-content" alt="Honeymoon">
-                </a>
-                <a href="https://youtu.be/hO50O0aNNck?si=xcKfhar-oQD6Cx7u" target="_blank" class="film-block">
-                    <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
-                    <img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="video-content" alt="Maria Eduarda">
-                </a>
-                <a href="https://youtu.be/nLdfKG-cwAk?si=EY1WXMXyrRxTaUhC" target="_blank" class="film-block">
-                    <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
-                    <img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="video-content" alt="Ato I">
-                </a>
-                <a href="https://youtu.be/9ZECe84pbnU?si=zp3PAKdX0SmjSF_N" target="_blank" class="film-block">
-                    <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
-                    <img src="https://i.ibb.co/LDpkRN3W/Captura-de-tela-2026-01-18-011818.png" class="video-content" alt="O Show Tem Que Continuar">
-                </a>
-            </div>
-            
-            <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:10px;">
-                (Arraste para o lado)
-            </p>
-        </section>
-
-        <!-- SEÇÃO 4: GALERIA COM LIGHTBOX -->
-        <section id="galeria" class="gallery-section fade-in delay-4">
-            
+        <!-- TRABALHOS SELECIONADOS -->
+        <section id="work" class="works-section reveal delay-3">
             <div class="section-header">
-                <h3>Explorações Visuais</h3>
-                <p>Fotografia | 3D | Design Gráfico</p>
-                <p style="font-size: 0.7rem; margin-top:5px; opacity:0.6;">(Toque na imagem para ampliar)</p>
+                <span class="section-title">Filmografia Selecionada</span>
+                <span style="font-size: 0.8rem; color: #777;">(Arraste para ver)</span>
             </div>
 
-            <div class="masonry-grid">
-
-                <!-- Item 1 -->
-                <div class="gallery-item" data-title="Retrato Urbano" data-description="Fotografia, 2024. Inspirado no álbum Honeymoon, de Lana Del Rey.">
-                    <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Fotografia">
-                    <span class="item-tag">Fotografia</span>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="gallery-item" data-title="Mesa 3D, TST 2024.1" data-description="Composição 3D utilizando Blender e pós-produção no Photoshop.">
-                    <img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="Render 3D">
-                    <span class="item-tag">Cena 3D</span>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="gallery-item" data-title="Design de Vestuário" data-description="Conceito visual para estampa de camisa - Projeto Eletro.">
-                    <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design Gráfico">
-                    <span class="item-tag">Design</span>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="gallery-item" data-title="Retrato Urbano" data-description="Fotografia, 2024. Inspirado no álbum Honeymoon, de Lana Del Rey.">
-                    <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Fotografia Landscape">
-                    <span class="item-tag">Fotografia</span>
-                </div>
-
-                <!-- Item 5 -->
-                <div class="gallery-item" data-title="Quarto 3D, INFO 2024.1" data-description="Composição 3D utilizando Blender e pós-produção no Photoshop.">
-                    <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="Arte Digital">
-                    <span class="item-tag">Cena 3D</span>
-                </div>
-
-                 <!-- Item 6 -->
-                 <div class="gallery-item" data-title="Fotografia Editorial" data-description="Ensaio fotográfico focado em expressão e estilo.">
-                    <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Conceito">
-                    <span class="item-tag">Fotografia</span>
-                </div>
-
+            <div class="film-container">
+                <!-- Filme 1 -->
+                <a href="https://youtu.be/hO50O0aNNck" target="_blank" class="film-block">
+                    <img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="film-img" alt="Maria Eduarda">
+                    <div class="film-info">
+                        <div class="film-title">Maria Eduarda</div>
+                    </div>
+                </a>
+                <!-- Filme 2 -->
+                <a href="https://youtu.be/nLdfKG-cwAk" target="_blank" class="film-block">
+                    <img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="film-img" alt="Ato I">
+                    <div class="film-info">
+                        <div class="film-title">Ato I - TST</div>
+                    </div>
+                </a>
+                <!-- Filme 3 -->
+                <a href="https://youtu.be/9ZECe84pbnU" target="_blank" class="film-block">
+                    <img src="https://i.ibb.co/LDpkRN3W/Captura-de-tela-2026-01-18-011818.png" class="film-img" alt="Show">
+                    <div class="film-info">
+                        <div class="film-title">O Show Tem Que Continuar</div>
+                    </div>
+                </a>
             </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer id="contato" class="fade-in delay-3">
-            <div class="footer-info">
-                <div class="location">Santa Luzia, PB — Brasil</div>
-                <div class="contacts">
-                    <a href="mailto:pedroazevedolimaa@gmail.com">Mandar E-mail</a>
+        <!-- GALERIA (MASONRY REFINADO) -->
+        <section class="works-section reveal delay-3">
+            <div class="section-header">
+                <span class="section-title">Explorações Visuais</span>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Item -->
+                <div class="gallery-item" data-title="Retrato Urbano">
+                    <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto">
+                </div>
+                <!-- Item -->
+                <div class="gallery-item" data-title="TST 3D">
+                    <img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="3D">
+                </div>
+                <!-- Item -->
+                <div class="gallery-item" data-title="Design Eletro">
+                    <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design">
+                </div>
+                <!-- Item -->
+                <div class="gallery-item" data-title="Longa Exposição">
+                    <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto">
+                </div>
+                 <!-- Item -->
+                 <div class="gallery-item" data-title="Moda">
+                    <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto">
+                </div>
+                <!-- Item -->
+                <div class="gallery-item" data-title="3D Art">
+                    <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D">
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER: CONVITE -->
+        <footer id="contact" class="reveal">
+            <div class="footer-cta">
+                <h3>Vamos criar algo<br>juntos.</h3>
+                <p>Disponível para projetos autorais e comerciais.</p>
+                
+                <div class="contact-links">
+                    <a href="mailto:pedroazevedolimaa@gmail.com">pedroazevedolimaa@gmail.com</a>
                     <a href="https://instagram.com/porpedroazevedo" target="_blank">Instagram</a>
+                    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
                 </div>
-                <div class="copyright">
-                    &copy; 2025 Pedro Azevedo. Todos os direitos reservados.
+
+                <div class="copy">
+                    &copy; 2025 Pedro Azevedo. All rights reserved.
                 </div>
+            </div>
+            
+            <div class="location-stamp">
+                <span style="display:block; text-align:right; font-size:0.8rem; text-transform:uppercase; letter-spacing:2px; color:#999;">
+                    Based in<br>Paraíba, BR
+                </span>
             </div>
         </footer>
 
     </div>
 
-    <!-- ESTRUTURA DO LIGHTBOX (MODAL) -->
+    <!-- LIGHTBOX SIMPLES E ELEGANTE -->
     <div id="lightbox" class="lightbox">
+        <button class="lightbox-close">&times;</button>
         <div class="lightbox-content">
-            <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-            <img id="lightbox-img" class="lightbox-img" src="" alt="Ampliado">
-            <div class="lightbox-info">
-                <h4 id="lightbox-title" class="lightbox-title">Título do Projeto</h4>
-                <p id="lightbox-desc" class="lightbox-desc">Descrição do projeto aqui.</p>
-            </div>
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption" class="lightbox-caption"></p>
         </div>
     </div>
 
-    <!-- SCRIPT DO LIGHTBOX -->
     <script>
+        // Lightbox Logic
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxTitle = document.getElementById('lightbox-title');
-        const lightboxDesc = document.getElementById('lightbox-desc');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-
-        galleryItems.forEach(item => {
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCap = document.getElementById('lightbox-caption');
+        
+        document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', () => {
-                const imgUrl = item.querySelector('img').src;
-                const title = item.getAttribute('data-title');
-                const desc = item.getAttribute('data-description');
-
-                lightboxImg.src = imgUrl;
-                lightboxTitle.textContent = title;
-                lightboxDesc.textContent = desc;
-                
+                const img = item.querySelector('img');
+                lbImg.src = img.src;
+                lbCap.innerText = item.getAttribute('data-title');
                 lightbox.classList.add('active');
             });
         });
 
-        function closeLightbox() {
+        document.querySelector('.lightbox-close').addEventListener('click', () => {
             lightbox.classList.remove('active');
-            setTimeout(() => { lightboxImg.src = ''; }, 300);
-        }
+        });
 
         lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) { closeLightbox(); }
+            if(e.target === lightbox) lightbox.classList.remove('active');
         });
     </script>
-
 </body>
 </html>
