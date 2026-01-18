@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pedro Azevedo</title>
+  <title>Pedro Azevedo — Portfólio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #000000;
-      --text: #f5f5f5;
-      --muted: #8a8a8a;
-    }
-
     * {
       margin: 0;
       padding: 0;
@@ -19,185 +17,190 @@
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f0e8;
+      color: #111;
     }
 
-    img {
-      max-width: 100%;
-      display: block;
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 90px 40px;
     }
 
     /* HERO */
-    header {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      padding: 6rem 8vw;
-      align-items: center;
+    .hero {
+      text-align: center;
+      margin-bottom: 120px;
     }
 
-    .hero-left {
+    .hero .author {
+      font-size: 14px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .polaroids {
+      position: relative;
       display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 50px;
     }
 
-    .hero-name {
-      max-width: 420px;
+    .polaroids img {
+      width: 280px;
+      background: #fff;
+      padding: 12px 12px 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      transform: rotate(-3deg);
     }
 
-    .hero-arrow {
-      max-width: 220px;
+    .polaroids img:last-child {
+      transform: rotate(2deg);
     }
 
     .hero-text {
-      max-width: 360px;
-      font-size: 0.95rem;
-      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
-    .hero-photo {
-      width: 100%;
-      max-width: 520px;
-      margin-left: auto;
-    }
-
-    /* SECTIONS */
-    section {
-      padding: 6rem 8vw;
-    }
-
-    h2 {
-      font-size: 0.9rem;
-      font-weight: 400;
-      text-transform: uppercase;
+    .location {
+      margin-top: 50px;
+      font-size: 12px;
       letter-spacing: 1px;
-      margin-bottom: 3rem;
-      color: var(--muted);
     }
 
-    /* PROJECTS */
-    .projects {
+    /* SOBRE */
+    .about {
+      max-width: 720px;
+      margin-bottom: 120px;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
+    .quote span {
+      display: block;
+      font-size: 13px;
+      opacity: 0.7;
+      margin-top: 6px;
+    }
+
+    .about p {
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* TRABALHOS */
+    .works h2 {
+      font-size: 14px;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 3rem 2rem;
+      gap: 30px;
     }
 
-    .project {
-      max-width: 300px;
+    .work {
+      background: #000;
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
     }
 
-    .project h3 {
-      font-size: 1rem;
-      font-weight: 400;
-      margin-bottom: 0.3rem;
+    .work img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .project span {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ABOUT */
-    .about {
-      max-width: 480px;
-      font-size: 0.95rem;
-      color: var(--muted);
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 4rem 8vw;
-      font-size: 0.8rem;
-      color: var(--muted);
+    .play {
+      position: absolute;
+      inset: 0;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      color: white;
+      background: rgba(0,0,0,0.25);
     }
 
-    footer a {
-      color: var(--muted);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: var(--text);
-    }
-
-    @media (max-width: 900px) {
-      header {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-photo {
-        margin-left: 0;
-      }
-    }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
-  <header>
-    <div class="hero-left">
-      <!-- PNG DO NOME -->
-      <img src="nome-pedro-azevedo.png" alt="Pedro Azevedo" class="hero-name" />
+  <div class="container">
 
-      <!-- PNG DA SETA COM NOME -->
-      <img src="seta-nome.png" alt="Seta" class="hero-arrow" />
+    <!-- HERO COM POLAROIDS -->
+    <section class="hero">
+      <div class="author">por pedro azevedo</div>
 
-      <!-- TEXTO -->
-      <p class="hero-text">
-        Criador visual focado em imagem, narrativa e estética. Trabalho entre cinema, fotografia e projetos autorais.
+      <div class="polaroids">
+        <!-- SUBSTITUA PELAS SUAS IMAGENS -->
+        <img src="polaroid-1.jpg" alt="Pedro criança" />
+        <img src="polaroid-2.jpg" alt="Pedro atualmente" />
+      </div>
+
+      <div class="hero-text">
+        Criador visual focado em imagem e narrativa.<br>
+        Trabalho com cinema e fotografia, entre projetos autorais<br>
+        e produções comerciais para marcas.
+      </div>
+
+      <div class="location">SANTA LUZIA, PB</div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="about">
+      <div class="quote">
+        “Medicina, direito, administração, engenharia são atividades nobres, necessárias à vida.<br>
+        Mas a poesia, a beleza, o romance, o amor, são as coisas pelas quais vale a pena viver.”
+        <span>— Sociedade dos Poetas Mortos</span>
+      </div>
+
+      <p>
+        Desde pequeno, cinema, música, fotografia e comunicação sempre foram mais que interesse.
+        Foram linguagem — forma de observar o mundo e contar histórias.
       </p>
-    </div>
 
-    <!-- FOTO PRINCIPAL -->
-    <img src="foto-principal.png" alt="Foto de Pedro" class="hero-photo" />
-  </header>
+      <p>
+        Hoje, trabalho como criador visual, desenvolvendo projetos autorais
+        e produções comerciais para marcas, unindo narrativa, estética
+        e um olhar cinematográfico.
+      </p>
+    </section>
 
-  <!-- PROJETOS -->
-  <section>
-    <h2>Projetos</h2>
-    <div class="projects">
-      <div class="project">
-        <h3>Curta-metragem autoral</h3>
-        <span>filme · 2024</span>
+    <!-- TRABALHOS -->
+    <section class="works">
+      <h2>TRABALHOS SELECIONADOS</h2>
+
+      <div class="grid">
+        <div class="work">
+          <img src="thumb-1.jpg" alt="Projeto 1" />
+          <div class="play">▶</div>
+        </div>
+        <div class="work">
+          <img src="thumb-2.jpg" alt="Projeto 2" />
+          <div class="play">▶</div>
+        </div>
+        <div class="work">
+          <img src="thumb-3.jpg" alt="Projeto 3" />
+          <div class="play">▶</div>
+        </div>
       </div>
+    </section>
 
-      <div class="project">
-        <h3>Teaser cultural</h3>
-        <span>vídeo · 2023</span>
-      </div>
-
-      <div class="project">
-        <h3>Ensaio fotográfico</h3>
-        <span>fotografia · 2025</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- SOBRE -->
-  <section>
-    <h2>Sobre</h2>
-    <p class="about">
-      Me interesso por processos e por imagens que carregam tempo. Cada projeto nasce de uma inquietação pessoal e se constrói no percurso, sem pressa de se fechar em uma forma única.
-    </p>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <span>© Pedro Azevedo</span>
-    <div>
-      <a href="#">Instagram</a> ·
-      <a href="#">Email</a>
-    </div>
-  </footer>
+  </div>
 
 </body>
 </html>
