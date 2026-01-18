@@ -45,10 +45,9 @@
 
         .fade-in {
             animation: fadeIn 1.2s ease forwards;
-            opacity: 0; /* Começa invisível */
+            opacity: 0;
         }
 
-        /* Atrasos para cascata de animação */
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
@@ -59,7 +58,7 @@
             padding: 0 20px;
         }
 
-        /* --- HEADER / NAV --- */
+        /* --- HEADER --- */
         header {
             padding: 40px 0;
             display: flex;
@@ -88,7 +87,7 @@
             color: #000;
         }
 
-        /* --- SEÇÃO 1: HERO (POLAROIDS) --- */
+        /* --- SEÇÃO 1: HERO (FOTOS PESSOAIS) --- */
         .hero-section {
             text-align: center;
             margin-bottom: 100px;
@@ -106,7 +105,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 350px; /* Altura fixa para conter a sobreposição */
+            height: 350px;
             position: relative;
             margin-bottom: 40px;
         }
@@ -127,7 +126,7 @@
             filter: grayscale(100%) contrast(1.1);
         }
 
-        /* Posicionamento das fotos */
+        /* AQUI ESTÁ O AJUSTE DAS FOTOS */
         .polaroid-1 {
             z-index: 1;
             transform: rotate(-6deg) translateX(-60px);
@@ -161,7 +160,7 @@
             color: #444;
         }
 
-        /* --- SEÇÃO 2: TEXTO & CITAÇÃO --- */
+        /* --- SEÇÃO 2: MANIFESTO --- */
         .narrative-section {
             max-width: 700px;
             margin: 0 auto 120px auto;
@@ -195,7 +194,7 @@
             color: #333;
         }
 
-        /* --- SEÇÃO 3: PORTFÓLIO --- */
+        /* --- SEÇÃO 3: PORTFÓLIO (VIDEOS) --- */
         .work-section {
             margin-bottom: 100px;
         }
@@ -332,7 +331,7 @@
             }
             .polaroid {
                 position: relative;
-                transform: rotate(0) !important; /* Remove rotação no mobile */
+                transform: rotate(0) !important;
                 width: 90%;
             }
             .grid {
@@ -341,9 +340,6 @@
             .contacts a {
                 display: block;
                 margin: 10px 0;
-            }
-            .hero-title {
-                font-size: 2rem;
             }
         }
     </style>
@@ -362,18 +358,19 @@
             </nav>
         </header>
 
-        <!-- 1. SEÇÃO HERO / SOBRE -->
+        <!-- 1. SEÇÃO HERO / SOBRE (FOTOS) -->
         <section id="sobre" class="hero-section fade-in delay-1">
             <h1 class="hero-title">por pedro azevedo</h1>
 
             <div class="polaroid-wrapper">
-                <!-- Foto Criança -->
+                <!-- Foto Criança: (Renomeie o arquivo para 'pedrocrianca.png') -->
                 <div class="polaroid polaroid-1">
-                    <img src="Imagens/pedroadulto.png" alt="Pedro Atual">
+                    <img src="Imagens/pedrocrianca.png" alt="Arquivo Pessoal">
                 </div>
+
                 <!-- Foto Atual -->
                 <div class="polaroid polaroid-2">
-                   <img src="Imagens/pedrocriança.png" alt="Pedro Criança">
+                    <img src="Imagens/pedroadulto.png" alt="Retrato Pedro">
                 </div>
             </div>
 
@@ -396,29 +393,27 @@
             </div>
         </section>
 
-        <!-- 3. SEÇÃO PORTFÓLIO -->
+        <!-- 3. SEÇÃO PORTFÓLIO (VÍDEOS) -->
         <section id="trabalhos" class="work-section fade-in delay-3">
             <h3 class="section-header">Trabalhos selecionados</h3>
             
             <div class="grid">
-                <!-- Projeto 1 -->
+                <!-- VÍDEO 1 -->
                 <div class="project-card">
-                    <img src="https://picsum.photos/id/16/600/350" alt="Video Still 1">
+                    <!-- Coloque a imagem da capa do vídeo dentro da pasta Imagens e troque o nome aqui -->
+                    <img src="https://picsum.photos/id/16/600/350" alt="Projeto 1">
                     <div class="play-icon"></div>
                 </div>
-                <!-- Projeto 2 -->
+
+                <!-- VÍDEO 2 -->
                 <div class="project-card">
-                    <img src="https://picsum.photos/id/42/600/350" alt="Video Still 2">
+                    <img src="https://picsum.photos/id/42/600/350" alt="Projeto 2">
                     <div class="play-icon"></div>
                 </div>
-                <!-- Projeto 3 -->
+
+                <!-- VÍDEO 3 -->
                 <div class="project-card">
-                    <img src="https://picsum.photos/id/88/600/350" alt="Video Still 3">
-                    <div class="play-icon"></div>
-                </div>
-                <!-- Projeto 4 -->
-                <div class="project-card">
-                    <img src="https://picsum.photos/id/96/600/350" alt="Video Still 4">
+                    <img src="https://picsum.photos/id/88/600/350" alt="Projeto 3">
                     <div class="play-icon"></div>
                 </div>
             </div>
@@ -430,8 +425,7 @@
                 <div class="location">Santa Luzia, PB — Brasil</div>
                 
                 <div class="contacts">
-                    <!-- Substitua pelos seus links reais -->
-                    <a href="mailto:pedro@exemplo.com">pedro@exemplo.com</a>
+                    <a href="mailto:pedro@exemplo.com">Mandar E-mail</a>
                     <a href="https://instagram.com/seuusuario" target="_blank">Instagram</a>
                 </div>
                 
