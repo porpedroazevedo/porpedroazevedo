@@ -143,7 +143,7 @@
         .polaroid-2 { z-index: 2; transform: rotate(5deg) translateX(60px) translateY(10px); }
         .polaroid:hover { z-index: 10; transform: scale(1.05) rotate(0deg); filter: grayscale(0%); }
 
-        /* --- FILM STRIP (DRAGGABLE) --- */
+        /* --- FILM STRIP (CORRIGIDO PARA ARRASTAR) --- */
         .works-section { margin-bottom: 120px; }
         .section-header {
             display: flex; justify-content: space-between; align-items: flex-end;
@@ -152,21 +152,44 @@
         .section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
         
         .film-container {
-            display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px;
-            cursor: grab; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+            display: flex; 
+            gap: 20px; 
+            overflow-x: auto; 
+            padding-bottom: 20px;
+            
+            /* Cursor de mãozinha para indicar que arrasta */
+            cursor: grab; 
+            -webkit-overflow-scrolling: touch; 
+            scrollbar-width: none;
         }
         .film-container::-webkit-scrollbar { display: none; }
-        .film-container.active { cursor: grabbing; }
+        
+        /* Cursor 'agarrando' quando clica */
+        .film-container.active { cursor: grabbing; cursor: -webkit-grabbing; }
 
         .film-block {
-            position: relative; flex-shrink: 0; width: 400px; aspect-ratio: 16/9;
-            background: #000; overflow: hidden; text-decoration: none; user-select: none;
+            position: relative; 
+            flex-shrink: 0; 
+            width: 320px; /* Reduzi um pouco para caberem melhor e o scroll fluir */
+            aspect-ratio: 16/9;
+            background: #000; 
+            overflow: hidden; 
+            text-decoration: none; 
+            
+            /* ESSENCIAL: Impede que o texto/link seja selecionado ao arrastar */
+            user-select: none; 
+            -webkit-user-select: none;
         }
+        
         .film-img {
             width: 100%; height: 100%; object-fit: cover;
             transition: transform 0.5s ease, filter 0.5s ease;
-            filter: grayscale(100%); pointer-events: none;
+            filter: grayscale(100%); 
+            
+            /* ESSENCIAL: Impede o navegador de tentar arrastar a imagem em si */
+            pointer-events: none; 
         }
+        
         .film-block:hover .film-img { transform: scale(1.05); filter: grayscale(0%); }
         .film-info {
             position: absolute; bottom: 0; left: 0; width: 100%;
@@ -232,7 +255,6 @@
             .footer-cta h3 { font-size: 2rem; }
             .contact-links a { font-size: 1.2rem; }
             
-            /* Ajuste Polaroids Mobile */
             .polaroid-wrapper { flex-direction: column; height: auto; gap: 20px; margin-top: 20px; }
             .polaroid { position: relative; transform: none !important; width: 90%; }
         }
@@ -259,10 +281,9 @@
             <h2 class="intro-title">Visual Storyteller<br>& Director.</h2>
             <p class="intro-subtitle">Crio imagens que contam histórias antes de serem explicadas. Cinema, fotografia e narrativas visuais.</p>
             
-            <!-- HERO PROJECT: ATO I DEUS (SWAPPED) -->
+            <!-- HERO PROJECT: ATO I DEUS -->
             <div class="hero-project" onclick="window.open('https://youtu.be/9ZECe84pbnU?si=JOJEKJu72jiVgExW', '_blank')">
                 <div class="hero-media-wrapper">
-                    <!-- Thumbnail ATO I -->
                     <img src="https://i.ibb.co/sJdB37Jk/image.png" alt="Ato I" class="hero-img">
                 </div>
                 <div class="hero-meta">
@@ -291,7 +312,6 @@
                 <p>Desde pequeno, o cinema e a música foram mais que interesse, foram linguagem. Hoje, como produtor de mídias visuais, busco em cada frame não apenas a estética, mas a <strong>narrativa que permanece</strong>.</p>
             </div>
 
-            <!-- FOTOS POLAROID (MANTIDO) -->
             <div class="polaroid-wrapper">
                 <div class="polaroid polaroid-1">
                     <img src="https://i.ibb.co/3ydV0K8Z/foto1.png" alt="Pedro Criança">
@@ -303,7 +323,7 @@
 
         </section>
 
-        <!-- FILMOGRAFIA DRAGGABLE -->
+        <!-- FILMOGRAFIA COM 3 VÍDEOS (AJUSTADA) -->
         <section id="work" class="works-section reveal delay-3">
             <div class="section-header">
                 <span class="section-title">Filmografia Selecionada</span>
@@ -311,25 +331,22 @@
             </div>
 
             <div class="film-container">
-                <!-- Honeymoon movido para cá -->
-                <a href="https://youtu.be/hO50O0aNNck" target="_blank" class="film-block">
+                <!-- VÍDEO 1 -->
+                <a href="https://youtu.be/hO50O0aNNck" target="_blank" class="film-block" draggable="false">
                     <img src="https://i.ibb.co/fdG1BP0R/image.png" class="film-img" alt="Honeymoon">
                     <div class="film-info"><div class="film-title">Honeymoon II</div></div>
                 </a>
 
-                <a href="https://youtu.be/33X5UE3QbAU?si=akxlaKEhkLLfWKo0" target="_blank" class="film-block">
+                <!-- VÍDEO 2 -->
+                <a href="https://youtu.be/33X5UE3QbAU?si=akxlaKEhkLLfWKo0" target="_blank" class="film-block" draggable="false">
                     <img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="film-img" alt="Maria Eduarda">
                     <div class="film-info"><div class="film-title">Honeymoon I</div></div>
                 </a>
                 
-                <a href="https://youtu.be/9ZECe84pbnU" target="_blank" class="film-block">
+                <!-- VÍDEO 3 -->
+                <a href="https://youtu.be/9ZECe84pbnU" target="_blank" class="film-block" draggable="false">
                     <img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="film-img" alt="Show">
                     <div class="film-info"><div class="film-title">O Show Tem que Continuar</div></div>
-                </a>
-                
-                <a href="#" class="film-block">
-                    <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="film-img" alt="Extra">
-                    <div class="film-info"><div class="film-title">Projeto Autoral</div></div>
                 </a>
             </div>
         </section>
@@ -396,29 +413,56 @@
     </div>
 
     <script>
-        // DRAG SCROLL
+        // --- SCRIPT DE DRAG SCROLL (AGORA FUNCIONA) ---
         const slider = document.querySelector('.film-container');
         let isDown = false;
         let startX;
         let scrollLeft;
+        let isDragging = false; 
 
+        // 1. Ao clicar (mousedown)
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
+            isDragging = false;
             slider.classList.add('active');
             startX = e.pageX - slider.offsetLeft;
             scrollLeft = slider.scrollLeft;
+            // Previne seleção de texto e comportamento nativo de arrastar link
+            e.preventDefault(); 
         });
+
+        // 2. Ao soltar ou sair
         slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('active'); });
         slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('active'); });
+
+        // 3. Ao mover (mousemove)
         slider.addEventListener('mousemove', (e) => {
             if (!isDown) return;
-            e.preventDefault();
+            e.preventDefault(); // Bloqueia seleções nativas
             const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2;
+            const walk = (x - startX) * 2; // Velocidade
+            
+            // Detecta se moveu o suficiente para considerar um "arraste"
+            if(Math.abs(walk) > 5) {
+                isDragging = true;
+            }
             slider.scrollLeft = scrollLeft - walk;
         });
 
-        // LIGHTBOX
+        // 4. Bloqueia o clique no link se estiver arrastando
+        const links = document.querySelectorAll('.film-block');
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (isDragging) {
+                    e.preventDefault(); // Não abre o link se foi só um arraste
+                    e.stopImmediatePropagation();
+                }
+            });
+            // 5. Garante que a imagem/link não seja "fantasma" ao arrastar
+            link.addEventListener('dragstart', (e) => e.preventDefault());
+        });
+
+        // --- SCRIPT LIGHTBOX ---
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const lbCap = document.getElementById('lightbox-caption');
