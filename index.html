@@ -38,6 +38,7 @@
         .delay-1 { animation-delay: 0.2s; }
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; } /* Nova delay para a galeria */
 
         .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
@@ -101,7 +102,6 @@
             justify-content: flex-start;
         }
 
-        /* O Bloco Individual */
         .film-block {
             position: relative;
             flex-shrink: 0;
@@ -114,7 +114,6 @@
             text-decoration: none;
         }
 
-        /* A Moldura PNG */
         .frame-overlay {
             position: absolute;
             top: 0; left: 0;
@@ -124,7 +123,6 @@
             background-size: 100% 100%; 
         }
 
-        /* O Vídeo/Foto */
         .video-content {
             width: 100%;  
             height: 100%; 
@@ -136,11 +134,8 @@
             top: 0; left: 0;
         }
         
-        .film-block:hover .video-content {
-            filter: grayscale(0%);
-        }
+        .film-block:hover .video-content { filter: grayscale(0%); }
 
-        /* Ícone de Play no Hover */
         .film-block::after {
             content: '▶';
             position: absolute;
@@ -154,8 +149,65 @@
             text-shadow: 0 2px 5px rgba(0,0,0,0.5);
         }
 
-        .film-block:hover::after {
-            opacity: 1;
+        .film-block:hover::after { opacity: 1; }
+
+        /* --- NOVA SEÇÃO: GALERIA MASONRY (FOTOS, 3D, DESIGN) --- */
+        .gallery-section { margin-top: 100px; margin-bottom: 100px; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .section-header p { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Layout Masonry (Colunas estilo Pinterest) */
+        .masonry-grid {
+            column-count: 2; /* 2 colunas por padrão */
+            column-gap: 20px;
+        }
+
+        .gallery-item {
+            display: inline-block; /* Importante para não quebrar no meio */
+            width: 100%;
+            margin-bottom: 20px;
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #ddd; /* Cor de fundo enquanto carrega */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(100%);
+            transition: filter 0.4s ease, transform 0.4s ease;
+        }
+
+        /* Efeito Hover */
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.02);
+        }
+
+        /* Label (Ex: "3D", "Foto") */
+        .item-tag {
+            position: absolute;
+            bottom: 15px; left: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            color: #000;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 2px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .item-tag { opacity: 1; transform: translateY(0); }
+
+        /* Ajuste para telas maiores */
+        @media (min-width: 768px) {
+            .masonry-grid { column-count: 3; } /* 3 colunas em PC */
         }
 
         /* FOOTER */
@@ -181,7 +233,8 @@
             <a href="#" class="brand">Pedro Azevedo</a>
             <nav class="nav-links">
                 <a href="#sobre">Sobre</a>
-                <a href="#trabalhos">Trabalhos</a>
+                <a href="#trabalhos">Filmes</a>
+                <a href="#galeria">Galeria</a>
                 <a href="#contato">Contato</a>
             </nav>
         </header>
@@ -191,11 +244,9 @@
             <h1 class="hero-title">por pedro azevedo</h1>
 
             <div class="polaroid-wrapper">
-                <!-- Foto Criança -->
                 <div class="polaroid polaroid-1">
                     <img src="https://i.ibb.co/3ydV0K8Z/foto1.png" alt="Pedro Criança">
                 </div>
-                <!-- Foto Atual -->
                 <div class="polaroid polaroid-2">
                     <img src="https://i.ibb.co/20n3PcWK/foto2.png" alt="Pedro Atual">
                 </div>
@@ -220,32 +271,31 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 3: FILME (SEUS VÍDEOS) -->
-        <section id="trabalhos" style="margin-bottom: 100px;">
-            <h3 style="text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 30px;">Trabalhos selecionados</h3>
+        <!-- SEÇÃO 3: FILMES (VÍDEOS) -->
+        <section id="trabalhos">
+            <h3 style="text-align: center; font-size: 1.5rem; font-weight: 700; margin-bottom: 30px;">Filmes & Vídeos</h3>
             
             <div class="film-container">
                 
-                <!-- VÍDEO 1: Honeymoon -->
+                <!-- VÍDEO 1 -->
                 <a href="https://youtu.be/hO50O0aNNck?si=xcKfhar-oQD6Cx7u" target="_blank" class="film-block">
                     <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
-                    <!-- Capa automática do Youtube -->
                     <img src="https://i.ibb.co/fdG1BP0R/image.png" class="video-content" alt="Honeymoon">
                 </a>
 
-                <!-- VÍDEO 2: Maria Eduarda -->
+                <!-- VÍDEO 2 -->
                 <a href="https://youtu.be/hO50O0aNNck?si=xcKfhar-oQD6Cx7u" target="_blank" class="film-block">
                     <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
                     <img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="video-content" alt="Maria Eduarda">
                 </a>
 
-                <!-- VÍDEO 3: TST 2023 -->
+                <!-- VÍDEO 3 -->
                 <a href="https://youtu.be/nLdfKG-cwAk?si=EY1WXMXyrRxTaUhC" target="_blank" class="film-block">
                     <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
                     <img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="video-content" alt="Ato I">
                 </a>
 
-                <!-- VÍDEO 4: DEUS -->
+                <!-- VÍDEO 4 -->
                 <a href="https://youtu.be/9ZECe84pbnU?si=zp3PAKdX0SmjSF_N" target="_blank" class="film-block">
                     <img src="https://i.ibb.co/JwMj7QCt/filme.png" class="frame-overlay" alt="Moldura">
                     <img src="https://i.ibb.co/LDpkRN3W/Captura-de-tela-2026-01-18-011818.png" class="video-content" alt="O Show Tem Que Continuar">
@@ -254,8 +304,58 @@
             </div>
             
             <p style="text-align:center; font-size:0.8rem; color:#999; margin-top:10px;">
-                (Arraste para o lado | Clique para assistir)
+                (Arraste para o lado)
             </p>
+        </section>
+
+        <!-- SEÇÃO 4: GALERIA (FOTOS, 3D, DESIGN) -->
+        <section id="galeria" class="gallery-section fade-in delay-4">
+            
+            <div class="section-header">
+                <h3>Explorações Visuais</h3>
+                <p>Fotografia | 3D | Design Gráfico</p>
+            </div>
+
+            <div class="masonry-grid">
+                
+                <!-- Item 1: Fotografia Vertical -->
+                <div class="gallery-item">
+                    <!-- Substitua o SRC pela sua foto -->
+                    <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Fotografia">
+                    <span class="item-tag">Fotografia</span>
+                </div>
+
+                <!-- Item 2: 3D Render -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="Render 3D">
+                    <span class="item-tag">Cena 3D</span>
+                </div>
+
+                <!-- Item 3: Design/Poster -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg"" alt="Design Gráfico">
+                    <span class="item-tag">Design</span>
+                </div>
+
+                <!-- Item 4: Fotografia Horizontal -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Fotografia Landscape">
+                    <span class="item-tag">Fotografia</span>
+                </div>
+
+                <!-- Item 5: 3d  -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="Arte Digital">
+                    <span class="item-tag">Cena 3D</span>
+                </div>
+
+                 <!-- Item 6: fotografia -->
+                 <div class="gallery-item">
+                    <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Conceito">
+                    <span class="item-tag">Fotografia</span>
+                </div>
+
+            </div>
         </section>
 
         <!-- FOOTER -->
