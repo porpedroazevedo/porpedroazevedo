@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pedro Lucas — Portfólio</title>
+  <title>Pedro Azevedo</title>
 
   <style>
     :root {
-      --bg: #f3f0e8;
-      --text: #1a1a1a;
-      --muted: #6e6e6e;
-      --accent: #b30000;
+      --bg: #000000;
+      --text: #f5f5f5;
+      --muted: #8a8a8a;
     }
 
     * {
@@ -22,33 +21,49 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Times New Roman', Times, serif;
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    img {
+      max-width: 100%;
+      display: block;
     }
 
     /* HERO */
     header {
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
       padding: 6rem 8vw;
-      display: flex;
       align-items: center;
     }
 
-    header h1 {
-      font-size: clamp(3rem, 6vw, 6rem);
-      font-weight: 400;
-      margin-bottom: 2rem;
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
     }
 
-    header p {
+    .hero-name {
       max-width: 420px;
-      font-size: 1rem;
+    }
+
+    .hero-arrow {
+      max-width: 220px;
+    }
+
+    .hero-text {
+      max-width: 360px;
+      font-size: 0.95rem;
       color: var(--muted);
+    }
+
+    .hero-photo {
+      width: 100%;
+      max-width: 520px;
+      margin-left: auto;
     }
 
     /* SECTIONS */
@@ -57,32 +72,29 @@
     }
 
     h2 {
-      font-size: 1.2rem;
+      font-size: 0.9rem;
       font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 3rem;
-      text-transform: lowercase;
+      color: var(--muted);
     }
 
     /* PROJECTS */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 4rem 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 3rem 2rem;
     }
 
     .project {
-      max-width: 260px;
-    }
-
-    .project img {
-      width: 100%;
-      margin-bottom: 1rem;
-      filter: grayscale(100%);
+      max-width: 300px;
     }
 
     .project h3 {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 400;
+      margin-bottom: 0.3rem;
     }
 
     .project span {
@@ -92,88 +104,98 @@
 
     /* ABOUT */
     .about {
-      max-width: 520px;
+      max-width: 480px;
       font-size: 0.95rem;
       color: var(--muted);
-    }
-
-    .about em {
-      color: var(--accent);
-      font-style: normal;
     }
 
     /* FOOTER */
     footer {
       padding: 4rem 8vw;
-      display: flex;
-      justify-content: space-between;
       font-size: 0.8rem;
       color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
     }
 
     footer a:hover {
-      text-decoration: underline;
+      color: var(--text);
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 900px) {
       header {
-        padding-top: 8rem;
+        grid-template-columns: 1fr;
       }
 
-      .projects {
-        gap: 3rem;
+      .hero-photo {
+        margin-left: 0;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- HERO -->
   <header>
-    <div>
-      <h1>Pedro Lucas</h1>
-      <p>
-        Criador visual interessado em <em>imagem, narrativa e tempo</em>. Meu trabalho atravessa cinema, fotografia e projetos autorais.
+    <div class="hero-left">
+      <!-- PNG DO NOME -->
+      <img src="nome-pedro-azevedo.png" alt="Pedro Azevedo" class="hero-name" />
+
+      <!-- PNG DA SETA COM NOME -->
+      <img src="seta-nome.png" alt="Seta" class="hero-arrow" />
+
+      <!-- TEXTO -->
+      <p class="hero-text">
+        Criador visual focado em imagem, narrativa e estética. Trabalho entre cinema, fotografia e projetos autorais.
       </p>
     </div>
+
+    <!-- FOTO PRINCIPAL -->
+    <img src="foto-principal.png" alt="Foto de Pedro" class="hero-photo" />
   </header>
 
+  <!-- PROJETOS -->
   <section>
-    <h2>selected works</h2>
+    <h2>Projetos</h2>
     <div class="projects">
       <div class="project">
-        <img src="https://via.placeholder.com/400x520" alt="Projeto" />
         <h3>Curta-metragem autoral</h3>
         <span>filme · 2024</span>
       </div>
 
       <div class="project">
-        <img src="https://via.placeholder.com/400x520" alt="Projeto" />
         <h3>Teaser cultural</h3>
         <span>vídeo · 2023</span>
       </div>
 
       <div class="project">
-        <img src="https://via.placeholder.com/400x520" alt="Projeto" />
         <h3>Ensaio fotográfico</h3>
         <span>fotografia · 2025</span>
       </div>
     </div>
   </section>
 
+  <!-- SOBRE -->
   <section>
-    <h2>about</h2>
+    <h2>Sobre</h2>
     <p class="about">
-      Trabalho com imagens como quem escreve um diário fragmentado. Me interesso por processos, por silêncios e por aquilo que permanece entre uma cena e outra.
-      <br /><br />
-      Cada projeto nasce de uma inquietação pessoal e se constrói no caminho, sem pressa de chegar a uma forma definitiva.
+      Me interesso por processos e por imagens que carregam tempo. Cada projeto nasce de uma inquietação pessoal e se constrói no percurso, sem pressa de se fechar em uma forma única.
     </p>
   </section>
 
+  <!-- FOOTER -->
   <footer>
-    <span>© Pedro Lucas</span>
+    <span>© Pedro Azevedo</span>
     <div>
-      <a href="#">instagram</a> ·
-      <a href="#">email</a>
+      <a href="#">Instagram</a> ·
+      <a href="#">Email</a>
     </div>
   </footer>
 
