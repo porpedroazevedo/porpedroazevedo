@@ -78,7 +78,8 @@
         .intro-title { font-family: var(--font-serif); font-style: italic; font-size: 5.5rem; line-height: 1.05; letter-spacing: -1.5px; font-weight: 500; margin-bottom: 25px; }
         .intro-subtitle { font-size: 1.3rem; color: var(--secondary-color); font-weight: 300; max-width: 600px; }
 
-        .hero-project { width: 100%; cursor: pointer; }
+        /* HERO PROJETO DESTAQUE */
+        .hero-project { width: 100%; cursor: pointer; text-decoration: none; color: inherit; display: block; }
         .hero-media-wrapper { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 2px; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.8s; }
         .hero-project:hover .hero-img { transform: scale(1.03); opacity: 1; filter: brightness(0.95); }
@@ -87,7 +88,7 @@
         .meta-left h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 5px; }
         .meta-tags { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary-color); }
 
-        /* --- SOBRE (MANIFESTO E POLAROIDS ORIGINAIS) --- */
+        /* --- SOBRE (MANIFESTO E POLAROIDS) --- */
         .manifesto-section { padding: 80px 0; text-align: center; max-width: 750px; margin: 0 auto 80px auto; }
         .quote-text { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; font-style: italic; color: #111; margin-bottom: 30px; line-height: 1.3; }
         .manifesto-bio { font-size: 1.1rem; padding-top: 40px; margin: 0 auto 60px auto; color: #444; border-top: 1px solid rgba(0,0,0,0.1); }
@@ -105,10 +106,7 @@
         .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.1); }
         .section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
         
-        .film-slider-wrapper {
-            width: 100vw;
-            padding-left: calc((100vw - var(--container-width)) / 2);
-        }
+        .film-slider-wrapper { width: 100vw; padding-left: calc((100vw - var(--container-width)) / 2); }
         
         .film-container { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 40px; padding-right: 40px; cursor: grab; scrollbar-width: none; }
         .film-container::-webkit-scrollbar { display: none; }
@@ -119,18 +117,8 @@
         .film-block:hover .film-img, .gallery-item:hover img, .commercial-item:hover img { transform: scale(1.04); filter: grayscale(0%) brightness(0.85); }
 
         /* --- LAYOUT ASSIMÉTRICO (STICKY SCROLL) --- */
-        .sticky-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 60px;
-            align-items: start;
-            margin-bottom: 150px;
-        }
-        .sticky-sidebar {
-            position: -webkit-sticky;
-            position: sticky;
-            top: 120px;
-        }
+        .sticky-layout { display: grid; grid-template-columns: 280px 1fr; gap: 60px; align-items: start; margin-bottom: 150px; }
+        .sticky-sidebar { position: -webkit-sticky; position: sticky; top: 120px; }
         .sticky-sidebar .section-title { border: none; padding: 0; margin-bottom: 10px; display: block; font-size: 1rem; }
         .sticky-desc { font-size: 0.8rem; color: #999; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;}
 
@@ -167,9 +155,7 @@
         .lightbox-next { right: 20px; }
 
         /* --- MOBILE --- */
-        @media (max-width: 1100px) {
-            .film-slider-wrapper { padding-left: 20px; }
-        }
+        @media (max-width: 1100px) { .film-slider-wrapper { padding-left: 20px; } }
         
         @media (max-width: 768px) {
             .hero-section { margin: 40px 0 80px 0; }
@@ -194,6 +180,7 @@
 
     <div class="container">
         
+        <!-- HEADER -->
         <header class="reveal">
             <a href="#" class="brand">Pedro Azevedo</a>
             <nav class="nav-links">
@@ -204,36 +191,44 @@
             </nav>
         </header>
 
-        <!-- HERO LIMPO -->
+        <!-- HERO SECTION (PROJETO PRINCIPAL) -->
         <section class="hero-section reveal delay-1">
             <div class="hero-text">
                 <h1 class="hero-title-top">por pedro azevedo</h1>
                 <h2 class="intro-title">Visual Storyteller<br>& Director.</h2>
+                <!-- EDITE SEU TEXTO DE APRESENTAÇÃO AQUI -->
                 <p class="intro-subtitle">Crio imagens que contam histórias antes de serem explicadas. Cinema, fotografia e narrativas visuais.</p>
             </div>
             
-            <div class="hero-project" onclick="window.open('https://www.youtube.com', '_blank')">
+            <!--[COLOQUE O LINK DO SEU VÍDEO PRINCIPAL AQUI NO LUGAR DO '#'] -->
+            <a href="https://www.youtube.com/watch?v=9ZECe84pbnU&t=2s" target="_blank" class="hero-project">
                 <div class="hero-media-wrapper">
-                    <img src="https://i.ibb.co/sJdB37Jk/image.png" alt="Ato I" class="hero-img">
+                    <!-- [COLOQUE O LINK DA IMAGEM DE CAPA PRINCIPAL AQUI] -->
+                    <img src="https://i.ibb.co/sJdB37Jk/image.png" alt="Capa Projeto" class="hero-img">
                 </div>
                 <div class="hero-meta">
                     <div class="meta-left">
+                        <!-- EDITE O TÍTULO DO PROJETO DESTAQUE AQUI -->
                         <h2>ATO I: DEUS</h2>
                         <span class="meta-tags">Direção / Curta-Metragem</span>
                     </div>
                 </div>
-            </div>
+            </a>
         </section>
 
-        <!-- SOBRE (POLAROIDS ORIGINAIS MANTIDAS) -->
+        <!-- SOBRE (MANIFESTO E POLAROIDS) -->
         <section id="about" class="manifesto-section reveal delay-2">
+            <!-- EDITE SUA FRASE DE DESTAQUE AQUI -->
             <p class="quote-text">“A poesia, a beleza, o romance e o amor... são as coisas pelas quais vale a pena viver.”</p>
             <div class="manifesto-bio">
+                <!-- EDITE SUA MINI-BIO AQUI -->
                 <p>Produtor visual focado na <strong>narrativa que permanece</strong>. Busco transformar o comercial em estético e o autoral em eterno.</p>
             </div>
             
             <div class="polaroid-wrapper">
+                <!-- [COLOQUE O LINK DA SUA FOTO POLAROID 1 AQUI] -->
                 <div class="polaroid polaroid-1"><img src="https://i.ibb.co/0VhrWy67/foto-2.png" alt="Pedro"></div>
+                <!--[COLOQUE O LINK DA SUA FOTO POLAROID 2 AQUI] -->
                 <div class="polaroid polaroid-2"><img src="https://i.ibb.co/v4vm86Zm/foto-1.png" alt="Pedro"></div>
             </div>
         </section>
@@ -245,11 +240,35 @@
         <div class="container">
             <div class="section-header"><span class="section-title">Filmografia</span></div>
         </div>
+        
         <div class="film-slider-wrapper">
             <div class="film-container" id="film-strip">
-                <a href="#" class="film-block"><img src="https://i.ibb.co/fdG1BP0R/image.png" class="film-img"></a>
-                <a href="#" class="film-block"><img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="film-img"></a>
-                <a href="#" class="film-block"><img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="film-img"></a>
+                
+                <!-- VÍDEO 1 -->
+                <!--[COLOQUE O LINK DO SEU YOUTUBE/VIMEO EM href=""] -->
+                <a href="https://www.youtube.com/watch?v=33X5UE3QbAU" target="_blank" class="film-block">
+                    <!--[COLOQUE A CAPA DO VÍDEO 1 AQUI] -->
+                    <img src="https://i.ibb.co/fdG1BP0R/image.png" class="film-img">
+                </a>
+                
+                <!-- VÍDEO 2 -->
+                <a href="https://www.youtube.com/watch?v=hO50O0aNNck" target="_blank" class="film-block">
+                    <!-- [COLOQUE A CAPA DO VÍDEO 2 AQUI] -->
+                    <img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="film-img">
+                </a>
+                
+                <!-- VÍDEO 3 -->
+                <a href="https://www.youtube.com/watch?v=nLdfKG-cwAk&t=1s" target="_blank" class="film-block">
+                    <!--[COLOQUE A CAPA DO VÍDEO 3 AQUI] -->
+                    <img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="film-img">
+                </a>
+                
+             <a href="https://www.youtube.com/watch?v=CyL9Ohd-mws" target="_blank" class="film-block">
+                    <!--[COLOQUE A CAPA DO VÍDEO 3 AQUI] -->
+                    <img src="https://i.ibb.co/mFvZcjv2/Captura-de-tela-2026-04-20-040033.png" class="film-img">
+                </a>
+                <!-- SE QUISER ADICIONAR MAIS VÍDEOS, É SÓ COPIAR E COLAR O BLOCO ACIMA AQUI -->
+
             </div>
         </div>
     </section>
@@ -265,10 +284,8 @@
             </div>
             
             <div class="sticky-content">
-                <div class="commercial-grid" id="provador-gallery">
-                    <!-- Fotos entram via JS -->
-                </div>
-
+                <!-- AS FOTOS DESTA SESSÃO SÃO ADICIONADAS LÁ NO FINAL, NO JAVASCRIPT -->
+                <div class="commercial-grid" id="provador-gallery"></div>
                 <div class="load-more-container">
                     <button id="load-more-btn">Carregar Mais Fotos</button>
                 </div>
@@ -284,13 +301,38 @@
 
             <div class="sticky-content">
                 <div class="gallery-grid">
-                    <div class="gallery-item" data-title="Retrato feminino em ambiente externo"><img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto"></div>
-                    <div class="gallery-item" data-title="Render TST 3D"><img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="3D"></div>
-                    <div class="gallery-item" data-title="Design Eletro"><img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design"></div>
-                    <div class="gallery-item" data-title="Retrato feminino"><img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto"></div>
-                    <div class="gallery-item" data-title="Retrato ao entardecer"><img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto"></div>
-                    <div class="gallery-item" data-title="Render 3D"><img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D"></div>
-                    <div class="gallery-item" data-title="Retrato externo"><img src="https://i.ibb.co/fzpr4zyQ/IMG-3534-JPG.jpg" alt="Foto"></div>
+                    
+                    <!--[COLOQUE SUAS IMAGENS DE EXPLORAÇÃO ABAIXO] -->
+                    <!-- Troque o link src="" e o data-title="" de cada uma -->
+                    
+                    <div class="gallery-item" data-title="Título da Foto 1">
+                        <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 2">
+                        <img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="3D">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 3">
+                        <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 4">
+                        <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 5">
+                        <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 6">
+                        <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D">
+                    </div>
+                    
+                    <div class="gallery-item" data-title="Título da Foto 7">
+                        <img src="https://i.ibb.co/fzpr4zyQ/IMG-3534-JPG.jpg" alt="Foto">
+                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -299,16 +341,17 @@
         <footer id="contact" class="reveal delay-1">
             <h3>Vamos criar<br>algo juntos.</h3>
             <div class="contact-links">
-                <a href="mailto:pedroazevedolimaa@gmail.com">E-mail</a>
-                <a href="#">Instagram</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Behance</a>
+                <!-- [SEUS LINKS DE CONTATO AQUI] -->
+                <a href="mailto:seuemail@gmail.com">E-mail</a>
+                <a href="https://instagram.com/SEU_USER" target="_blank">Instagram</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Behance</a>
             </div>
-            <div class="footer-credits">Baseado em Paraíba, BR — © 2025</div>
+            <div class="footer-credits">Baseado em Paraíba, BR — © 2026</div>
         </footer>
     </div>
 
-    <!-- LIGHTBOX COM ZOOM E SWIPE -->
+    <!-- LIGHTBOX (NÃO PRECISA MEXER AQUI) -->
     <div id="lightbox" class="lightbox">
         <button class="lightbox-close">&times;</button>
         <button class="lightbox-prev lightbox-nav">&#10094;</button>
@@ -319,9 +362,14 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT: LÓGICA DE GALERIAS, LOAD MORE, LIGHTBOX E ZOOM -->
+    <!-- JAVASCRIPT -->
     <script>
+        /* ==========================================
+           1. INSIRA SUAS FOTOS DA SEÇÃO COMERCIAL AQUI
+           ========================================== */
         const fotosProvador =[
+            // SUBSTITUA OS LINKS ABAIXO PELAS SUAS FOTOS. 
+            // Você pode adicionar quantas linhas quiser!
             { url: 'https://i.ibb.co/3YdvkK8w/IMG-8872.jpg', titulo: 'Retrato P&B' },
             { url: 'https://i.ibb.co/rGBRTfSC/IMG-8838.jpg', titulo: 'Look Marrom' },
             { url: 'https://i.ibb.co/6JVkmrgM/IMG-8821.jpg', titulo: 'Look Preto' },
@@ -330,21 +378,15 @@
             { url: 'https://i.ibb.co/BKB7WQNy/IMG-8844.jpg', titulo: 'Vestido Marrom' },
             { url: 'https://i.ibb.co/cS9gvpg5/IMG-8868.jpg', titulo: 'Look Preto e Bege' },
             { url: 'https://i.ibb.co/Pv58gmWm/IMG-8867.jpg', titulo: 'Look Bege' },
-            { url: 'https://i.ibb.co/FbQf3YW3/IMG-4455.jpg', titulo: 'Retrato Carnaval Criativo' },
-            { url: 'https://i.ibb.co/6cjPktgj/IMG-4426.jpg', titulo: 'Retrato Carnaval Criativo 02' },
-            { url: 'https://i.ibb.co/xxJ022n/IMG-4424.jpg', titulo: 'Retrato Carnaval Criativo 03' },
-            { url: 'https://i.ibb.co/qGRj4Xx/IMG-4418-JPG.jpg', titulo: 'Retrato Casual' },
-            { url: 'https://i.ibb.co/SwW2LkTN/IMG-4416.jpg', titulo: 'Retrato em Plano Médio P&B' },
-            { url: 'https://i.ibb.co/Lh619JYk/IMG-4413.jpg', titulo: 'Retrato em Plano Médio' },
-            { url: 'https://i.ibb.co/BVz4Hj9s/IMG-4407.jpg', titulo: 'Retrato em Plano Médio Borrado' },
-            { url: 'https://i.ibb.co/6chD2YbB/IMG-4405.jpg', titulo: 'Retrato Horizontal' },
-            { url: 'https://i.ibb.co/yBcNPZLM/IMG-4399.jpg', titulo: 'Retrato Plano Aberto' },
-            { url: 'https://i.ibb.co/rKcjVkMy/IMG-4397.jpg', titulo: 'Retrato Plano Aberto 02' }
+            { url: 'https://i.ibb.co/FbQf3YW3/IMG-4455.jpg', titulo: 'Retrato Carnaval' },
+            { url: 'https://i.ibb.co/qGRj4Xx/IMG-4418-JPG.jpg', titulo: 'Retrato Casual' }
+            // { url: 'SEU_LINK_AQUI', titulo: 'SEU_TITULO_AQUI' }
         ];
 
+        /* --- LÓGICA DE CARREGAMENTO (LOAD MORE) --- */
         const grid = document.getElementById('provador-gallery');
         const loadMoreBtn = document.getElementById('load-more-btn');
-        let currentIndex = 0; const step = 8;
+        let currentIndex = 0; const step = 8; // Quantas fotos carregar por vez
 
         function renderPhotos() {
             const batch = fotosProvador.slice(currentIndex, currentIndex + step);
@@ -359,11 +401,10 @@
             currentIndex += step;
             if(currentIndex >= fotosProvador.length) loadMoreBtn.style.display = 'none';
         }
-
         loadMoreBtn.onclick = renderPhotos;
         renderPhotos();
 
-        /* LIGHTBOX SYSTEM */
+        /* --- LÓGICA DO LIGHTBOX --- */
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const lbCap = document.getElementById('lightbox-caption');
@@ -404,7 +445,7 @@
             if (e.key === 'Escape') closeLightbox();
         });
 
-        /* ZOOM E ARRASTO */
+        /* --- ZOOM E ARRASTO DO LIGHTBOX --- */
         let zoomLevel = 1; let isDraggingZoom = false; let startXZoom = 0, startYZoom = 0; let translateX = 0, translateY = 0;
 
         function resetZoom() {
@@ -458,7 +499,7 @@
         lbImg.addEventListener('mousedown', startPan); window.addEventListener('mousemove', pan); window.addEventListener('mouseup', endPan);
         lbImg.addEventListener('touchstart', startPan, { passive: true }); window.addEventListener('touchmove', pan, { passive: false }); window.addEventListener('touchend', endPan);
 
-        /* SWIPE CELULAR */
+        /* --- SWIPE CELULAR --- */
         let swipeStartX = 0;
         lb.addEventListener('touchstart', e => { if (zoomLevel === 1) swipeStartX = e.changedTouches[0].screenX; }, {passive: true});
         lb.addEventListener('touchend', e => {
@@ -469,14 +510,33 @@
             }
         }, {passive: true});
 
-        /* APPLY EXPLORAÇÕES & DRAG SCROLL */
+        /* --- ATIVAR LIGHTBOX NAS EXPLORAÇÕES VISUAIS --- */
         document.querySelectorAll('.gallery-item').forEach(item => { item.onclick = () => openLightboxGallery(item.querySelector('img').src, '.gallery-item'); });
         
+        /* --- DRAG SCROLL INTELIGENTE DA FILMOGRAFIA (NÃO ABRE LINK SE ARRASTAR) --- */
         const slider = document.getElementById('film-strip');
-        let isDown = false; let startX; let scrollLeft;
-        slider.onmousedown = (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; }
-        slider.onmouseleave = () => isDown = false; slider.onmouseup = () => isDown = false;
-        slider.onmousemove = (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 2; }
+        let isDown = false; let isDraggingScroll = false; let startX; let scrollLeft;
+
+        slider.onmousedown = (e) => { 
+            isDown = true; isDraggingScroll = false; 
+            startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; 
+        }
+        slider.onmouseleave = () => isDown = false; 
+        slider.onmouseup = () => isDown = false;
+        
+        slider.onmousemove = (e) => { 
+            if(!isDown) return; 
+            isDraggingScroll = true; e.preventDefault(); 
+            const x = e.pageX - slider.offsetLeft; 
+            slider.scrollLeft = scrollLeft - (x - startX) * 2; 
+        }
+
+        // Bloqueia clique nos vídeos se o usuário estiver apenas arrastando o carrossel
+        document.querySelectorAll('.film-block').forEach(link => {
+            link.onclick = (e) => {
+                if (isDraggingScroll) { e.preventDefault(); }
+            };
+        });
     </script>
 </body>
 </html>
