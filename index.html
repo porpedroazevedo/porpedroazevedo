@@ -7,7 +7,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <!-- Fontes premium: DM Sans (limpa) e Playfair Display (editorial) -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <style>
         /* --- ESTILOS GERAIS E VARIÁVEIS --- */
@@ -16,7 +17,8 @@
             --text-color: #111;
             --secondary-color: #666;
             --font-main: 'DM Sans', sans-serif;
-            --container-width: 1000px;
+            --font-serif: 'Playfair Display', serif;
+            --container-width: 1100px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,10 +30,18 @@
             font-family: var(--font-main);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            overflow-x: clip; 
+            position: relative;
         }
 
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
+        /* --- TEXTURA CINEMATOGRÁFICA (FILM GRAIN) --- */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04; pointer-events: none; z-index: 9998; 
+        }
+
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
         /* --- ANIMAÇÕES --- */
         @keyframes fadeUp {
@@ -54,99 +64,129 @@
         .nav-links a { text-decoration: none; color: var(--secondary-color); margin-left: 25px; transition: color 0.3s; }
         .nav-links a:hover { color: #000; }
 
-        /* --- HERO / PROJETO DESTAQUE --- */
-        .intro-section { margin: 60px 0 120px 0; }
-        .hero-title-top { font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
-        .intro-title { font-size: 4rem; line-height: 1; letter-spacing: -2px; font-weight: 700; margin-bottom: 20px; }
-        .intro-subtitle { font-size: 1.3rem; color: var(--secondary-color); font-weight: 300; max-width: 600px; margin-bottom: 60px; }
+        /* --- HERO SECTION (LIMPA E HIERÁRQUICA) --- */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            margin: 60px 0 120px 0;
+        }
+        .hero-text {
+            max-width: 850px;
+            margin-bottom: 60px;
+        }
+        .hero-title-top { font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--secondary-color); }
+        .intro-title { font-family: var(--font-serif); font-style: italic; font-size: 5.5rem; line-height: 1.05; letter-spacing: -1.5px; font-weight: 500; margin-bottom: 25px; }
+        .intro-subtitle { font-size: 1.3rem; color: var(--secondary-color); font-weight: 300; max-width: 600px; }
 
-        .hero-project { width: 100%; margin-bottom: 40px; cursor: pointer; }
-        .hero-media-wrapper { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 2px; background: #000; }
-        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.7s ease; }
-        .hero-project:hover .hero-img { transform: scale(1.03); opacity: 1; }
+        .hero-project { width: 100%; cursor: pointer; }
+        .hero-media-wrapper { width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 2px; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1), opacity 0.8s; }
+        .hero-project:hover .hero-img { transform: scale(1.03); opacity: 1; filter: brightness(0.95); }
         
-        .hero-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px; }
-        .meta-left h2 { font-size: 1.8rem; font-weight: 500; margin-bottom: 5px; }
+        .hero-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px; }
+        .meta-left h2 { font-size: 1.5rem; font-weight: 500; margin-bottom: 5px; }
         .meta-tags { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary-color); }
-        .meta-desc { max-width: 400px; font-size: 1rem; color: #444; }
 
-        /* --- SOBRE / POLAROIDS --- */
-        .manifesto-section { padding: 80px 0; text-align: center; max-width: 750px; margin: 0 auto; }
-        .quote-text { font-size: 1.4rem; font-weight: 300; font-style: italic; color: #444; margin-bottom: 15px; }
-        .manifesto-bio { font-size: 1.1rem; border-top: 1px solid #ddd; padding-top: 40px; margin: 0 auto 60px auto; }
+        /* --- SOBRE (MANIFESTO E POLAROIDS ORIGINAIS) --- */
+        .manifesto-section { padding: 80px 0; text-align: center; max-width: 750px; margin: 0 auto 80px auto; }
+        .quote-text { font-family: var(--font-serif); font-size: 2rem; font-weight: 400; font-style: italic; color: #111; margin-bottom: 30px; line-height: 1.3; }
+        .manifesto-bio { font-size: 1.1rem; padding-top: 40px; margin: 0 auto 60px auto; color: #444; border-top: 1px solid rgba(0,0,0,0.1); }
 
         .polaroid-wrapper { display: flex; justify-content: center; align-items: center; height: 400px; position: relative; }
         .polaroid { position: absolute; transition: all 0.4s ease; width: 400px; }
-        .polaroid img { width: 100%; border-radius: 4px; filter: grayscale(100%) drop-shadow(0 10px 15px rgba(0,0,0,0.3)); }
+        .polaroid img { width: 100%; border-radius: 4px; filter: grayscale(100%) drop-shadow(0 10px 15px rgba(0,0,0,0.3)); transition: filter 0.4s ease; }
         .polaroid-1 { z-index: 1; transform: rotate(-5deg) translateX(-80px); }
         .polaroid-2 { z-index: 2; transform: rotate(5deg) translateX(60px) translateY(10px); }
         .polaroid:hover { z-index: 10; transform: scale(1.05) rotate(0deg); }
         .polaroid:hover img { filter: grayscale(0%); }
 
-        /* --- FILMOGRAFIA (HORIZONTAL) --- */
-        .works-section { margin-bottom: 120px; }
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        /* --- FILMOGRAFIA EDGE-TO-EDGE (VAZA DA TELA) --- */
+        .full-bleed-section { margin-bottom: 120px; position: relative; z-index: 1; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(0,0,0,0.1); }
         .section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
         
-        .film-container { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; cursor: grab; scrollbar-width: none; }
-        .film-container::-webkit-scrollbar { display: none; }
-        .film-block { position: relative; flex-shrink: 0; width: 320px; aspect-ratio: 16/9; background: #000; overflow: hidden; }
-        .film-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: all 0.5s; pointer-events: none; }
-        .film-block:hover .film-img { filter: grayscale(0%); transform: scale(1.05); }
-
-        /* --- GRID COMERCIAL (PROVADOR) --- */
-        .commercial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
-        .commercial-item { aspect-ratio: 3/4; cursor: pointer; overflow: hidden; border-radius: 4px; background: #e5e4de; }
-        .commercial-item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1); }
-        .commercial-item:hover img { transform: scale(1.05); filter: brightness(1); }
-
-        .load-more-container { text-align: center; margin-top: 40px; }
-        #load-more-btn { 
-            padding: 15px 35px; background: transparent; border: 1px solid #000; 
-            font-family: var(--font-main); text-transform: uppercase; letter-spacing: 2px; 
-            font-size: 0.75rem; cursor: pointer; transition: all 0.3s;
+        .film-slider-wrapper {
+            width: 100vw;
+            padding-left: calc((100vw - var(--container-width)) / 2);
         }
-        #load-more-btn:hover { background: #000; color: #fff; }
+        
+        .film-container { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 40px; padding-right: 40px; cursor: grab; scrollbar-width: none; }
+        .film-container::-webkit-scrollbar { display: none; }
+        .film-block { position: relative; flex-shrink: 0; width: 450px; aspect-ratio: 16/9; background: #000; overflow: hidden; border-radius: 2px; }
+        
+        .film-img, .gallery-item img, .commercial-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2, 1, 0.3, 1), filter 0.5s ease; }
+        .film-img, .gallery-item img { filter: grayscale(100%); }
+        .film-block:hover .film-img, .gallery-item:hover img, .commercial-item:hover img { transform: scale(1.04); filter: grayscale(0%) brightness(0.85); }
 
-        /* --- GALERIA MASONRY --- */
-        .gallery-grid { column-count: 3; column-gap: 20px; }
-        .gallery-item { display: inline-block; width: 100%; margin-bottom: 20px; cursor: pointer; }
-        .gallery-item img { width: 100%; filter: grayscale(100%); transition: all 0.4s; border-radius: 4px; }
-        .gallery-item:hover img { filter: grayscale(0%); }
+        /* --- LAYOUT ASSIMÉTRICO (STICKY SCROLL) --- */
+        .sticky-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 150px;
+        }
+        .sticky-sidebar {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 120px;
+        }
+        .sticky-sidebar .section-title { border: none; padding: 0; margin-bottom: 10px; display: block; font-size: 1rem; }
+        .sticky-desc { font-size: 0.8rem; color: #999; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;}
 
-        /* --- FOOTER --- */
-        footer { padding: 100px 0; border-top: 1px solid #ddd; display: flex; justify-content: space-between; }
-        .contact-links a { display: block; font-size: 1.5rem; text-decoration: none; color: var(--text-color); margin-bottom: 10px; }
+        /* --- GRIDS --- */
+        .commercial-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .commercial-item { aspect-ratio: 3/4; cursor: pointer; overflow: hidden; border-radius: 2px; background: #e5e4de; }
+        .commercial-item img { filter: brightness(0.95); }
 
-        /* --- LIGHTBOX --- */
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(242, 241, 235, 0.98); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+        .gallery-grid { column-count: 2; column-gap: 20px; }
+        .gallery-item { display: inline-block; width: 100%; margin-bottom: 20px; cursor: pointer; overflow: hidden; border-radius: 2px; }
+
+        .load-more-container { text-align: center; margin-top: 50px; }
+        #load-more-btn { padding: 16px 40px; background: transparent; border: 1px solid #000; font-family: var(--font-main); text-transform: uppercase; letter-spacing: 2px; font-size: 0.75rem; cursor: pointer; transition: all 0.4s ease; border-radius: 2px; }
+        #load-more-btn:hover { background: #000; color: #fff; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        /* --- FOOTER GIGANTE EDITORIAL --- */
+        footer { padding: 120px 0 60px 0; border-top: 1px solid rgba(0,0,0,0.1); display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+        footer h3 { font-family: var(--font-serif); font-style: italic; font-size: 5.5rem; line-height: 1; letter-spacing: -2px; margin-bottom: 50px; font-weight: 500; }
+        .contact-links { display: flex; gap: 50px; margin-bottom: 80px; justify-content: center; flex-wrap: wrap; }
+        .contact-links a { font-size: 0.95rem; text-decoration: none; color: var(--text-color); text-transform: uppercase; letter-spacing: 2px; position: relative; font-weight: 500; }
+        .contact-links a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -6px; left: 0; background-color: #000; transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        .contact-links a:hover::after { width: 100%; }
+        .footer-credits { color: #999; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
+
+        /* --- LIGHTBOX & ZOOM --- */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(242, 241, 235, 0.98); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; overflow: hidden; }
         .lightbox.active { opacity: 1; pointer-events: all; }
         .lightbox-content { max-width: 90vw; max-height: 90vh; text-align: center; position: relative; }
-        .lightbox img { max-height: 80vh; max-width: 100%; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); user-select: none; }
-        .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; background: none; border: none; cursor: pointer; z-index: 10000; }
-        
-        /* SETAS DO LIGHTBOX */
-        .lightbox-nav {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: none; border: none; color: #111;
-            font-size: 2.5rem; cursor: pointer; padding: 20px;
-            z-index: 10000; transition: transform 0.2s; user-select: none;
-            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
-        }
+        .lightbox img { max-height: 80vh; max-width: 100%; border-radius: 2px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); user-select: none; transition: transform 0.3s ease; cursor: zoom-in; transform-origin: center center; position: relative; z-index: 10001; }
+        .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; background: none; border: none; cursor: pointer; z-index: 10002; color: #111; }
+        .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: none; border: none; color: #111; font-size: 2.5rem; cursor: pointer; padding: 20px; z-index: 10002; transition: transform 0.2s; user-select: none; }
         .lightbox-nav:hover { transform: translateY(-50%) scale(1.1); }
         .lightbox-prev { left: 20px; }
         .lightbox-next { right: 20px; }
 
         /* --- MOBILE --- */
+        @media (max-width: 1100px) {
+            .film-slider-wrapper { padding-left: 20px; }
+        }
+        
         @media (max-width: 768px) {
-            .intro-title { font-size: 2.8rem; }
-            .hero-meta, footer { flex-direction: column; gap: 30px; }
-            .gallery-grid { column-count: 2; }
+            .hero-section { margin: 40px 0 80px 0; }
+            .intro-title { font-size: 3.5rem; }
+            
+            .sticky-layout { grid-template-columns: 1fr; gap: 20px; margin-bottom: 80px; }
+            .sticky-sidebar { position: relative; top: 0; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 20px; margin-bottom: 10px; }
+            
+            .polaroid-wrapper { height: auto; flex-direction: column; gap: 30px; padding-bottom: 20px; }
+            .polaroid { position: relative; width: 100%; transform: none !important; margin: 0 auto; }
+            
             .commercial-grid { grid-template-columns: repeat(2, 1fr); }
-            .polaroid-wrapper { height: auto; flex-direction: column; gap: 20px; }
-            .polaroid { position: relative; width: 100%; transform: none !important; }
+            footer h3 { font-size: 3.5rem; }
+            .contact-links { gap: 20px; flex-direction: column; }
             .lightbox-prev { left: 0px; font-size: 1.8rem; padding: 15px; }
             .lightbox-next { right: 0px; font-size: 1.8rem; padding: 15px; }
+            .film-block { width: 300px; }
         }
     </style>
 </head>
@@ -164,11 +204,13 @@
             </nav>
         </header>
 
-        <!-- HERO -->
-        <section class="intro-section reveal delay-1">
-            <h1 class="hero-title-top">por pedro azevedo</h1>
-            <h2 class="intro-title">Visual Storyteller<br>& Director.</h2>
-            <p class="intro-subtitle">Crio imagens que contam histórias antes de serem explicadas. Cinema, fotografia e narrativas visuais.</p>
+        <!-- HERO LIMPO -->
+        <section class="hero-section reveal delay-1">
+            <div class="hero-text">
+                <h1 class="hero-title-top">por pedro azevedo</h1>
+                <h2 class="intro-title">Visual Storyteller<br>& Director.</h2>
+                <p class="intro-subtitle">Crio imagens que contam histórias antes de serem explicadas. Cinema, fotografia e narrativas visuais.</p>
+            </div>
             
             <div class="hero-project" onclick="window.open('https://www.youtube.com', '_blank')">
                 <div class="hero-media-wrapper">
@@ -177,111 +219,108 @@
                 <div class="hero-meta">
                     <div class="meta-left">
                         <h2>ATO I: DEUS</h2>
-                        <span class="meta-tags">Direção / Curta-Metragem / 2025</span>
+                        <span class="meta-tags">Direção / Curta-Metragem</span>
                     </div>
-                    <div class="meta-desc">Exploração visual inspirada no álbum Carranca. Uma jornada sobre ancestralidade e o divino através de luz e movimento.</div>
                 </div>
             </div>
         </section>
 
-        <!-- SOBRE -->
+        <!-- SOBRE (POLAROIDS ORIGINAIS MANTIDAS) -->
         <section id="about" class="manifesto-section reveal delay-2">
             <p class="quote-text">“A poesia, a beleza, o romance e o amor... são as coisas pelas quais vale a pena viver.”</p>
             <div class="manifesto-bio">
                 <p>Produtor visual focado na <strong>narrativa que permanece</strong>. Busco transformar o comercial em estético e o autoral em eterno.</p>
             </div>
+            
             <div class="polaroid-wrapper">
                 <div class="polaroid polaroid-1"><img src="https://i.ibb.co/0VhrWy67/foto-2.png" alt="Pedro"></div>
                 <div class="polaroid polaroid-2"><img src="https://i.ibb.co/v4vm86Zm/foto-1.png" alt="Pedro"></div>
             </div>
         </section>
 
-        <!-- VÍDEOS -->
-        <section id="work" class="works-section reveal delay-3">
+    </div> <!-- Fim Container -->
+
+    <!-- VÍDEOS EDGE-TO-EDGE -->
+    <section id="work" class="full-bleed-section reveal delay-3">
+        <div class="container">
             <div class="section-header"><span class="section-title">Filmografia</span></div>
+        </div>
+        <div class="film-slider-wrapper">
             <div class="film-container" id="film-strip">
                 <a href="#" class="film-block"><img src="https://i.ibb.co/fdG1BP0R/image.png" class="film-img"></a>
                 <a href="#" class="film-block"><img src="https://i.ibb.co/0pRTMSY1/Captura-de-tela-2026-01-18-025930.png" class="film-img"></a>
                 <a href="#" class="film-block"><img src="https://i.ibb.co/nq1DKLgR/Captura-de-tela-2026-01-18-012344.png" class="film-img"></a>
             </div>
-        </section>
-
-        <!-- SEÇÃO COMERCIAL AUTOMATIZADA -->
-        <section id="commercial" class="works-section reveal delay-3">
-            <div class="section-header">
-                <span class="section-title">Fashion & Provador</span>
-                <span style="font-size: 0.7rem; color: #999;">LOOKBOOK</span>
-            </div>
-            
-            <div class="commercial-grid" id="provador-gallery">
-                <!-- Fotos entram aqui via JS -->
-            </div>
-
-            <div class="load-more-container">
-                <button id="load-more-btn">Carregar Mais Fotos</button>
-            </div>
-        </section>
-
-        <!-- EXPLORAÇÕES -->
-       <section class="works-section reveal delay-3">
-        <div class="section-header">
-            <span class="section-title">Explorações Visuais</span>
-        </div>
-
-        <div class="gallery-grid">
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
-                <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto">
-            </div>
-            <div class="gallery-item" data-title="Render TST 3D">
-                <img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="3D">
-            </div>
-            <div class="gallery-item" data-title="Design Eletro">
-                <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design">
-            </div>
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
-                <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto">
-            </div>
-             <div class="gallery-item" data-title="Retrato feminino ao entardecer">
-                <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto">
-            </div>
-            <div class="gallery-item" data-title="Render 3D para ELETRO">
-                <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D">
-            </div>
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
-                <img src="https://i.ibb.co/fzpr4zyQ/IMG-3534-JPG.jpg" alt="Foto">
-            </div>
         </div>
     </section>
 
-        <!-- FOOTER -->
-        <footer id="contact" class="reveal">
-            <div>
-                <h3>Vamos criar<br>algo juntos.</h3>
-                <div class="contact-links" style="margin-top: 30px;">
-                    <a href="mailto:pedroazevedolimaa@gmail.com">E-mail</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">LinkedIn</a>
+    <!-- Reinicia Container -->
+    <div class="container"> 
+
+        <!-- COMERCIAL (STICKY SCROLL) -->
+        <section id="commercial" class="sticky-layout reveal delay-3">
+            <div class="sticky-sidebar">
+                <h2 class="section-title">Fashion & Provador</h2>
+                <p class="sticky-desc">Comercial / Lookbook</p>
+            </div>
+            
+            <div class="sticky-content">
+                <div class="commercial-grid" id="provador-gallery">
+                    <!-- Fotos entram via JS -->
+                </div>
+
+                <div class="load-more-container">
+                    <button id="load-more-btn">Carregar Mais Fotos</button>
                 </div>
             </div>
-            <div style="text-align: right; color: #999; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem;">
-                Baseado em Paraíba, BR<br>© 2025
+        </section>
+
+        <!-- EXPLORAÇÕES (STICKY SCROLL) -->
+        <section class="sticky-layout reveal delay-3">
+            <div class="sticky-sidebar">
+                <h2 class="section-title">Explorações Visuais</h2>
+                <p class="sticky-desc">Fotografia / 3D</p>
             </div>
+
+            <div class="sticky-content">
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-title="Retrato feminino em ambiente externo"><img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto"></div>
+                    <div class="gallery-item" data-title="Render TST 3D"><img src="https://i.ibb.co/DNMW1Gf/tst-post.jpg" alt="3D"></div>
+                    <div class="gallery-item" data-title="Design Eletro"><img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design"></div>
+                    <div class="gallery-item" data-title="Retrato feminino"><img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto"></div>
+                    <div class="gallery-item" data-title="Retrato ao entardecer"><img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto"></div>
+                    <div class="gallery-item" data-title="Render 3D"><img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D"></div>
+                    <div class="gallery-item" data-title="Retrato externo"><img src="https://i.ibb.co/fzpr4zyQ/IMG-3534-JPG.jpg" alt="Foto"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER PREMIUM -->
+        <footer id="contact" class="reveal delay-1">
+            <h3>Vamos criar<br>algo juntos.</h3>
+            <div class="contact-links">
+                <a href="mailto:pedroazevedolimaa@gmail.com">E-mail</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Behance</a>
+            </div>
+            <div class="footer-credits">Baseado em Paraíba, BR — © 2025</div>
         </footer>
     </div>
 
-    <!-- LIGHTBOX -->
+    <!-- LIGHTBOX COM ZOOM E SWIPE -->
     <div id="lightbox" class="lightbox">
         <button class="lightbox-close">&times;</button>
         <button class="lightbox-prev lightbox-nav">&#10094;</button>
         <button class="lightbox-next lightbox-nav">&#10095;</button>
         <div class="lightbox-content">
             <img id="lightbox-img" src="" alt="Imagem Ampliada">
-            <p id="lightbox-caption" style="margin-top: 15px; font-weight: 500;"></p>
+            <p id="lightbox-caption" style="margin-top: 15px; font-weight: 500; font-family: var(--font-main);"></p>
         </div>
     </div>
 
+    <!-- JAVASCRIPT: LÓGICA DE GALERIAS, LOAD MORE, LIGHTBOX E ZOOM -->
     <script>
-        /* --- 1. LISTA DE FOTOS (BANCO DE DADOS) --- */
         const fotosProvador =[
             { url: 'https://i.ibb.co/3YdvkK8w/IMG-8872.jpg', titulo: 'Retrato P&B' },
             { url: 'https://i.ibb.co/rGBRTfSC/IMG-8838.jpg', titulo: 'Look Marrom' },
@@ -303,24 +342,18 @@
             { url: 'https://i.ibb.co/rKcjVkMy/IMG-4397.jpg', titulo: 'Retrato Plano Aberto 02' }
         ];
 
-        /* --- 2. LÓGICA DE CARREGAMENTO AUTOMÁTICO --- */
         const grid = document.getElementById('provador-gallery');
         const loadMoreBtn = document.getElementById('load-more-btn');
-
-        let currentIndex = 0;
-        const step = 8; // Quantas fotos carregar por clique
+        let currentIndex = 0; const step = 8;
 
         function renderPhotos() {
             const batch = fotosProvador.slice(currentIndex, currentIndex + step);
             batch.forEach(foto => {
                 const div = document.createElement('div');
                 div.className = 'commercial-item reveal';
-                div.dataset.title = foto.titulo; // Importante para o novo lightbox puxar o título
+                div.dataset.title = foto.titulo; 
                 div.innerHTML = `<img src="${foto.url}" alt="${foto.titulo}" loading="lazy">`;
-                
-                // Agora envia o próprio agrupador da classe '.commercial-item' para navegar só entre elas
                 div.onclick = () => openLightboxGallery(foto.url, '.commercial-item');
-                
                 grid.appendChild(div);
             });
             currentIndex += step;
@@ -328,111 +361,121 @@
         }
 
         loadMoreBtn.onclick = renderPhotos;
-        renderPhotos(); // Inicia a primeira carga
+        renderPhotos();
 
-        /* --- 3. LÓGICA DO LIGHTBOX COM NAVEGAÇÃO E SWIPE --- */
+        /* LIGHTBOX SYSTEM */
         const lb = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
         const lbCap = document.getElementById('lightbox-caption');
+        let currentLightboxImages =[]; let currentLightboxIndex = 0;
 
-        let currentLightboxImages =[];
-        let currentLightboxIndex = 0;
-
-        // Abre o lightbox pegando todas as imagens visíveis do mesmo grupo (selector)
         function openLightboxGallery(url, selector) {
             const items = document.querySelectorAll(selector);
             currentLightboxImages = Array.from(items).map(item => {
                 const img = item.querySelector('img');
-                return {
-                    url: img.src,
-                    title: item.dataset.title || img.alt || ""
-                };
+                return { url: img.src, title: item.dataset.title || img.alt || "" };
             });
-            
-            // Acha qual índice foi clicado
             currentLightboxIndex = currentLightboxImages.findIndex(img => img.url === url);
             if (currentLightboxIndex === -1) currentLightboxIndex = 0;
-
-            updateLightbox();
-            lb.classList.add('active');
+            updateLightbox(); lb.classList.add('active');
         }
 
-        // Atualiza a imagem da tela
         function updateLightbox() {
             if (currentLightboxImages.length === 0) return;
             const data = currentLightboxImages[currentLightboxIndex];
-            lbImg.src = data.url;
-            lbCap.innerText = data.title;
+            lbImg.src = data.url; lbCap.innerText = data.title;
+            resetZoom(); 
         }
 
-        function nextImage(e) {
-            if(e) e.stopPropagation();
-            if(currentLightboxImages.length === 0) return;
-            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
-            updateLightbox();
-        }
+        function nextImage(e) { if(e) e.stopPropagation(); if(currentLightboxImages.length === 0) return; currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length; updateLightbox(); }
+        function prevImage(e) { if(e) e.stopPropagation(); if(currentLightboxImages.length === 0) return; currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length; updateLightbox(); }
 
-        function prevImage(e) {
-            if(e) e.stopPropagation();
-            if(currentLightboxImages.length === 0) return;
-            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
-            updateLightbox();
-        }
-
-        // Eventos das Setas Visuais
         document.querySelector('.lightbox-next').onclick = nextImage;
         document.querySelector('.lightbox-prev').onclick = prevImage;
 
-        // Fechar
-        document.querySelector('.lightbox-close').onclick = () => lb.classList.remove('active');
-        lb.onclick = (e) => { 
-            if(e.target === lb || e.target.classList.contains('lightbox-content')) {
-                lb.classList.remove('active'); 
-            }
-        }
+        const closeLightbox = () => { lb.classList.remove('active'); resetZoom(); };
+        document.querySelector('.lightbox-close').onclick = closeLightbox;
+        lb.onclick = (e) => { if(e.target === lb || e.target.classList.contains('lightbox-content')) { closeLightbox(); } };
 
-        // Navegação por Teclado
         document.addEventListener('keydown', (e) => {
             if (!lb.classList.contains('active')) return;
             if (e.key === 'ArrowRight') nextImage();
             if (e.key === 'ArrowLeft') prevImage();
-            if (e.key === 'Escape') lb.classList.remove('active');
+            if (e.key === 'Escape') closeLightbox();
         });
 
-        // Navegação por Arrastar/Touch (Swipe para celular)
-        let touchStartX = 0;
-        let touchEndX = 0;
+        /* ZOOM E ARRASTO */
+        let zoomLevel = 1; let isDraggingZoom = false; let startXZoom = 0, startYZoom = 0; let translateX = 0, translateY = 0;
 
-        lb.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, {passive: true});
-
-        lb.addEventListener('touchend', e => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, {passive: true});
-
-        function handleSwipe() {
-            const threshold = 50; // Distância mínima para considerar um swipe
-            if (touchEndX < touchStartX - threshold) {
-                nextImage(); // Arrastou pra esquerda (próxima)
-            }
-            if (touchEndX > touchStartX + threshold) {
-                prevImage(); // Arrastou pra direita (anterior)
-            }
+        function resetZoom() {
+            zoomLevel = 1; translateX = 0; translateY = 0;
+            lbImg.style.transform = `translate(0px, 0px) scale(1)`;
+            lbImg.style.cursor = 'zoom-in';
         }
 
-        /* --- 4. APLICAR LIGHTBOX AS EXPLORAÇÕES VISUAIS --- */
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.onclick = () => openLightboxGallery(item.querySelector('img').src, '.gallery-item');
+        function applyTransform() {
+            lbImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomLevel})`;
+            lbImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+        }
+
+        lbImg.addEventListener('wheel', (e) => {
+            e.preventDefault(); const zoomStep = 0.2;
+            zoomLevel += (e.deltaY < 0) ? zoomStep : -zoomStep;
+            zoomLevel = Math.max(1, Math.min(zoomLevel, 4)); 
+            if (zoomLevel === 1) resetZoom(); else applyTransform();
         });
 
-        /* --- 5. DRAG SCROLL DA FILMOGRAFIA --- */
+        let lastTapTime = 0;
+        lbImg.addEventListener('click', (e) => {
+            const currentTime = new Date().getTime(); const tapLength = currentTime - lastTapTime;
+            if (tapLength < 300 && tapLength > 0) { 
+                if (zoomLevel > 1) resetZoom(); else { zoomLevel = 2.5; applyTransform(); }
+                e.preventDefault();
+            }
+            lastTapTime = currentTime; e.stopPropagation(); 
+        });
+
+        const startPan = (e) => {
+            if (zoomLevel > 1) {
+                isDraggingZoom = true; lbImg.style.cursor = 'grabbing'; lbImg.style.transition = 'none'; 
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                startXZoom = clientX - translateX; startYZoom = clientY - translateY;
+            }
+        };
+
+        const pan = (e) => {
+            if (!isDraggingZoom || zoomLevel === 1) return;
+            e.preventDefault(); 
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            translateX = clientX - startXZoom; translateY = clientY - startYZoom;
+            lbImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${zoomLevel})`;
+        };
+
+        const endPan = () => { if(isDraggingZoom) { isDraggingZoom = false; lbImg.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in'; lbImg.style.transition = 'transform 0.3s ease'; } };
+
+        lbImg.addEventListener('mousedown', startPan); window.addEventListener('mousemove', pan); window.addEventListener('mouseup', endPan);
+        lbImg.addEventListener('touchstart', startPan, { passive: true }); window.addEventListener('touchmove', pan, { passive: false }); window.addEventListener('touchend', endPan);
+
+        /* SWIPE CELULAR */
+        let swipeStartX = 0;
+        lb.addEventListener('touchstart', e => { if (zoomLevel === 1) swipeStartX = e.changedTouches[0].screenX; }, {passive: true});
+        lb.addEventListener('touchend', e => {
+            if (zoomLevel === 1) {
+                const swipeEndX = e.changedTouches[0].screenX; const threshold = 50; 
+                if (swipeEndX < swipeStartX - threshold) nextImage();
+                if (swipeEndX > swipeStartX + threshold) prevImage();
+            }
+        }, {passive: true});
+
+        /* APPLY EXPLORAÇÕES & DRAG SCROLL */
+        document.querySelectorAll('.gallery-item').forEach(item => { item.onclick = () => openLightboxGallery(item.querySelector('img').src, '.gallery-item'); });
+        
         const slider = document.getElementById('film-strip');
         let isDown = false; let startX; let scrollLeft;
         slider.onmousedown = (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; }
-        slider.onmouseleave = () => isDown = false;
-        slider.onmouseup = () => isDown = false;
+        slider.onmouseleave = () => isDown = false; slider.onmouseup = () => isDown = false;
         slider.onmousemove = (e) => { if(!isDown) return; e.preventDefault(); const x = e.pageX - slider.offsetLeft; slider.scrollLeft = scrollLeft - (x - startX) * 2; }
     </script>
 </body>
