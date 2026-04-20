@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -122,9 +121,21 @@
         /* --- LIGHTBOX --- */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(242, 241, 235, 0.98); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
         .lightbox.active { opacity: 1; pointer-events: all; }
-        .lightbox-content { max-width: 90vw; max-height: 90vh; text-align: center; }
-        .lightbox img { max-height: 80vh; max-width: 100%; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; background: none; border: none; cursor: pointer; }
+        .lightbox-content { max-width: 90vw; max-height: 90vh; text-align: center; position: relative; }
+        .lightbox img { max-height: 80vh; max-width: 100%; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); user-select: none; }
+        .lightbox-close { position: absolute; top: 30px; right: 30px; font-size: 2.5rem; background: none; border: none; cursor: pointer; z-index: 10000; }
+        
+        /* SETAS DO LIGHTBOX */
+        .lightbox-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: #111;
+            font-size: 2.5rem; cursor: pointer; padding: 20px;
+            z-index: 10000; transition: transform 0.2s; user-select: none;
+            text-shadow: 0 2px 10px rgba(255,255,255,0.5);
+        }
+        .lightbox-nav:hover { transform: translateY(-50%) scale(1.1); }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
@@ -134,6 +145,8 @@
             .commercial-grid { grid-template-columns: repeat(2, 1fr); }
             .polaroid-wrapper { height: auto; flex-direction: column; gap: 20px; }
             .polaroid { position: relative; width: 100%; transform: none !important; }
+            .lightbox-prev { left: 0px; font-size: 1.8rem; padding: 15px; }
+            .lightbox-next { right: 0px; font-size: 1.8rem; padding: 15px; }
         }
     </style>
 </head>
@@ -193,7 +206,7 @@
             </div>
         </section>
 
-        <!-- NOVO: SEÇÃO COMERCIAL AUTOMATIZADA -->
+        <!-- SEÇÃO COMERCIAL AUTOMATIZADA -->
         <section id="commercial" class="works-section reveal delay-3">
             <div class="section-header">
                 <span class="section-title">Fashion & Provador</span>
@@ -216,7 +229,7 @@
         </div>
 
         <div class="gallery-grid">
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo ">
+            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
                 <img src="https://i.ibb.co/yFgPzz1q/IMG-9515.jpg" alt="Foto">
             </div>
             <div class="gallery-item" data-title="Render TST 3D">
@@ -225,17 +238,18 @@
             <div class="gallery-item" data-title="Design Eletro">
                 <img src="https://i.ibb.co/YFhkKvYL/camisa-eletro.jpg" alt="Design">
             </div>
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo.">
+            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
                 <img src="https://i.ibb.co/qMp5QnnK/Firefly-20250308182313-3.jpg" alt="Foto">
             </div>
-             <div class="gallery-item" data-title="Retrato feminino ao entardecer.">
+             <div class="gallery-item" data-title="Retrato feminino ao entardecer">
                 <img src="https://i.ibb.co/4RMr3Qfr/IMG-7135.jpg" alt="Foto">
             </div>
-            <div class="gallery-item" data-title="Render 3D para ELETRO.">
+            <div class="gallery-item" data-title="Render 3D para ELETRO">
                 <img src="https://i.ibb.co/MDw3K24D/Imagem8.jpg" alt="3D">
-                  </div>
-            <div class="gallery-item" data-title="Retrato feminino em ambiente externo.">
+            </div>
+            <div class="gallery-item" data-title="Retrato feminino em ambiente externo">
                 <img src="https://i.ibb.co/fzpr4zyQ/IMG-3534-JPG.jpg" alt="Foto">
+            </div>
         </div>
     </section>
 
@@ -258,42 +272,40 @@
     <!-- LIGHTBOX -->
     <div id="lightbox" class="lightbox">
         <button class="lightbox-close">&times;</button>
+        <button class="lightbox-prev lightbox-nav">&#10094;</button>
+        <button class="lightbox-next lightbox-nav">&#10095;</button>
         <div class="lightbox-content">
-            <img id="lightbox-img" src="">
+            <img id="lightbox-img" src="" alt="Imagem Ampliada">
             <p id="lightbox-caption" style="margin-top: 15px; font-weight: 500;"></p>
         </div>
     </div>
 
     <script>
         /* --- 1. LISTA DE FOTOS (BANCO DE DADOS) --- */
-        /* ADICIONE NOVAS FOTOS AQUI ABAIXO: */
-        const fotosProvador = [
+        const fotosProvador =[
             { url: 'https://i.ibb.co/3YdvkK8w/IMG-8872.jpg', titulo: 'Retrato P&B' },
-            { url: 'https://i.ibb.co/rGBRTfSC/IMG-8838.jpg', titulo: 'Look Marrom ' },
-            { url: 'https://i.ibb.co/6JVkmrgM/IMG-8821.jpg"', titulo: 'Look Preto' },
+            { url: 'https://i.ibb.co/rGBRTfSC/IMG-8838.jpg', titulo: 'Look Marrom' },
+            { url: 'https://i.ibb.co/6JVkmrgM/IMG-8821.jpg', titulo: 'Look Preto' },
             { url: 'https://i.ibb.co/xtP3pcyH/IMG-8829.jpg', titulo: 'Look Marrom 02' },
-            { url: 'https://i.ibb.co/0yWsX0PG/IMG-8840.jpg', titulo: 'Look Vinho ' },
+            { url: 'https://i.ibb.co/0yWsX0PG/IMG-8840.jpg', titulo: 'Look Vinho' },
             { url: 'https://i.ibb.co/BKB7WQNy/IMG-8844.jpg', titulo: 'Vestido Marrom' },
             { url: 'https://i.ibb.co/cS9gvpg5/IMG-8868.jpg', titulo: 'Look Preto e Bege' },
             { url: 'https://i.ibb.co/Pv58gmWm/IMG-8867.jpg', titulo: 'Look Bege' },
-             { url: 'https://i.ibb.co/FbQf3YW3/IMG-4455.jpg', titulo: 'Retrato Carnaval Criativo' },
-            { url: 'https://i.ibb.co/6cjPktgj/IMG-4426.jpg', titulo: 'Look Marrom 02' },
-            { url: 'https://i.ibb.co/xxJ022n/IMG-4424.jpg', titulo: 'Look Vinho ' },
-            { url: 'https://i.ibb.co/qGRj4Xx/IMG-4418-JPG.jpg', titulo: 'Vestido Marrom' },
-            { url: 'https://i.ibb.co/SwW2LkTN/IMG-4416.jpg', titulo: 'Look Preto e Bege' },
-            { url: 'https://i.ibb.co/Lh619JYk/IMG-4413.jpg', titulo: 'Look Bege' },
-             { url: 'https://i.ibb.co/BVz4Hj9s/IMG-4407.jpg', titulo: 'Retrato Carnaval Criativo' },
-            { url: 'https://i.ibb.co/6chD2YbB/IMG-4405.jpg', titulo: 'Look Marrom ' },
-            { url: 'https://i.ibb.co/yBcNPZLM/IMG-4399.jpg', titulo: 'Look Preto' },
-            { url: 'https://i.ibb.co/rKcjVkMy/IMG-4397.jpg', titulo: 'Look Marrom 02' }
+            { url: 'https://i.ibb.co/FbQf3YW3/IMG-4455.jpg', titulo: 'Retrato Carnaval Criativo' },
+            { url: 'https://i.ibb.co/6cjPktgj/IMG-4426.jpg', titulo: 'Retrato Carnaval Criativo 02' },
+            { url: 'https://i.ibb.co/xxJ022n/IMG-4424.jpg', titulo: 'Retrato Carnaval Criativo 03' },
+            { url: 'https://i.ibb.co/qGRj4Xx/IMG-4418-JPG.jpg', titulo: 'Retrato Casual' },
+            { url: 'https://i.ibb.co/SwW2LkTN/IMG-4416.jpg', titulo: 'Retrato em Plano Médio P&B' },
+            { url: 'https://i.ibb.co/Lh619JYk/IMG-4413.jpg', titulo: 'Retrato em Plano Médio' },
+            { url: 'https://i.ibb.co/BVz4Hj9s/IMG-4407.jpg', titulo: 'Retrato em Plano Médio Borrado' },
+            { url: 'https://i.ibb.co/6chD2YbB/IMG-4405.jpg', titulo: 'Retrato Horizontal' },
+            { url: 'https://i.ibb.co/yBcNPZLM/IMG-4399.jpg', titulo: 'Retrato Plano Aberto' },
+            { url: 'https://i.ibb.co/rKcjVkMy/IMG-4397.jpg', titulo: 'Retrato Plano Aberto 02' }
         ];
 
         /* --- 2. LÓGICA DE CARREGAMENTO AUTOMÁTICO --- */
         const grid = document.getElementById('provador-gallery');
         const loadMoreBtn = document.getElementById('load-more-btn');
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
-        const lbCap = document.getElementById('lightbox-caption');
 
         let currentIndex = 0;
         const step = 8; // Quantas fotos carregar por clique
@@ -303,32 +315,119 @@
             batch.forEach(foto => {
                 const div = document.createElement('div');
                 div.className = 'commercial-item reveal';
+                div.dataset.title = foto.titulo; // Importante para o novo lightbox puxar o título
                 div.innerHTML = `<img src="${foto.url}" alt="${foto.titulo}" loading="lazy">`;
-                div.onclick = () => openLightbox(foto.url, foto.titulo);
+                
+                // Agora envia o próprio agrupador da classe '.commercial-item' para navegar só entre elas
+                div.onclick = () => openLightboxGallery(foto.url, '.commercial-item');
+                
                 grid.appendChild(div);
             });
             currentIndex += step;
             if(currentIndex >= fotosProvador.length) loadMoreBtn.style.display = 'none';
         }
 
-        function openLightbox(url, title) {
-            lbImg.src = url;
-            lbCap.innerText = title || "";
-            lb.classList.add('active');
-        }
-
         loadMoreBtn.onclick = renderPhotos;
         renderPhotos(); // Inicia a primeira carga
 
-        /* --- 3. OUTRAS INTERAÇÕES (SCROLL E LIGHTBOX ARTÍSTICO) --- */
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.onclick = () => openLightbox(item.querySelector('img').src, item.dataset.title);
+        /* --- 3. LÓGICA DO LIGHTBOX COM NAVEGAÇÃO E SWIPE --- */
+        const lb = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        const lbCap = document.getElementById('lightbox-caption');
+
+        let currentLightboxImages =[];
+        let currentLightboxIndex = 0;
+
+        // Abre o lightbox pegando todas as imagens visíveis do mesmo grupo (selector)
+        function openLightboxGallery(url, selector) {
+            const items = document.querySelectorAll(selector);
+            currentLightboxImages = Array.from(items).map(item => {
+                const img = item.querySelector('img');
+                return {
+                    url: img.src,
+                    title: item.dataset.title || img.alt || ""
+                };
+            });
+            
+            // Acha qual índice foi clicado
+            currentLightboxIndex = currentLightboxImages.findIndex(img => img.url === url);
+            if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+
+            updateLightbox();
+            lb.classList.add('active');
+        }
+
+        // Atualiza a imagem da tela
+        function updateLightbox() {
+            if (currentLightboxImages.length === 0) return;
+            const data = currentLightboxImages[currentLightboxIndex];
+            lbImg.src = data.url;
+            lbCap.innerText = data.title;
+        }
+
+        function nextImage(e) {
+            if(e) e.stopPropagation();
+            if(currentLightboxImages.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentLightboxImages.length;
+            updateLightbox();
+        }
+
+        function prevImage(e) {
+            if(e) e.stopPropagation();
+            if(currentLightboxImages.length === 0) return;
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentLightboxImages.length) % currentLightboxImages.length;
+            updateLightbox();
+        }
+
+        // Eventos das Setas Visuais
+        document.querySelector('.lightbox-next').onclick = nextImage;
+        document.querySelector('.lightbox-prev').onclick = prevImage;
+
+        // Fechar
+        document.querySelector('.lightbox-close').onclick = () => lb.classList.remove('active');
+        lb.onclick = (e) => { 
+            if(e.target === lb || e.target.classList.contains('lightbox-content')) {
+                lb.classList.remove('active'); 
+            }
+        }
+
+        // Navegação por Teclado
+        document.addEventListener('keydown', (e) => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+            if (e.key === 'Escape') lb.classList.remove('active');
         });
 
-        document.querySelector('.lightbox-close').onclick = () => lb.classList.remove('active');
-        lb.onclick = (e) => { if(e.target === lb) lb.classList.remove('active'); }
+        // Navegação por Arrastar/Touch (Swipe para celular)
+        let touchStartX = 0;
+        let touchEndX = 0;
 
-        // Drag Scroll da Filmografia
+        lb.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        lb.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            const threshold = 50; // Distância mínima para considerar um swipe
+            if (touchEndX < touchStartX - threshold) {
+                nextImage(); // Arrastou pra esquerda (próxima)
+            }
+            if (touchEndX > touchStartX + threshold) {
+                prevImage(); // Arrastou pra direita (anterior)
+            }
+        }
+
+        /* --- 4. APLICAR LIGHTBOX AS EXPLORAÇÕES VISUAIS --- */
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.onclick = () => openLightboxGallery(item.querySelector('img').src, '.gallery-item');
+        });
+
+        /* --- 5. DRAG SCROLL DA FILMOGRAFIA --- */
         const slider = document.getElementById('film-strip');
         let isDown = false; let startX; let scrollLeft;
         slider.onmousedown = (e) => { isDown = true; startX = e.pageX - slider.offsetLeft; scrollLeft = slider.scrollLeft; }
@@ -338,4 +437,3 @@
     </script>
 </body>
 </html>
-```
